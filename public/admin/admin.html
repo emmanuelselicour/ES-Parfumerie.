@@ -562,7 +562,7 @@
             background: white;
             border-radius: var(--radius);
             width: 90%;
-            max-width: 500px;
+            max-width: 600px;
             max-height: 90vh;
             overflow-y: auto;
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
@@ -635,6 +635,28 @@
 
         .btn-secondary:hover {
             background: #e0e0e0;
+        }
+
+        /* Form Controls */
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius);
+            font-size: 16px;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(138, 109, 59, 0.1);
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
         }
 
         /* Responsive */
@@ -1107,30 +1129,30 @@
                     <input type="hidden" id="product-id">
                     
                     <div class="form-group">
-                        <label for="product-name">Nom du produit</label>
-                        <input type="text" id="product-name" required class="form-control">
+                        <label for="product-name">Nom du produit *</label>
+                        <input type="text" id="product-name" class="form-control" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="product-description">Description</label>
-                        <textarea id="product-description" rows="3" required class="form-control" style="width: 100%; padding: 12px 15px; border: 2px solid var(--border-color); border-radius: var(--radius); font-family: inherit;"></textarea>
+                        <label for="product-description">Description *</label>
+                        <textarea id="product-description" class="form-control" rows="3" required></textarea>
                     </div>
                     
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                         <div class="form-group">
-                            <label for="product-price">Prix (€)</label>
-                            <input type="number" id="product-price" step="0.01" min="0" required class="form-control">
+                            <label for="product-price">Prix (€) *</label>
+                            <input type="number" id="product-price" class="form-control" step="0.01" min="0" required>
                         </div>
                         
                         <div class="form-group">
-                            <label for="product-stock">Stock</label>
-                            <input type="number" id="product-stock" min="0" required class="form-control">
+                            <label for="product-stock">Stock *</label>
+                            <input type="number" id="product-stock" class="form-control" min="0" required>
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="product-category">Catégorie</label>
-                        <select id="product-category" required class="form-control">
+                        <label for="product-category">Catégorie *</label>
+                        <select id="product-category" class="form-control" required>
                             <option value="">Sélectionner une catégorie</option>
                             <option value="men">Homme</option>
                             <option value="women">Femme</option>
@@ -1140,17 +1162,19 @@
                     
                     <div class="form-group">
                         <label for="product-image">URL de l'image</label>
-                        <input type="text" id="product-image" placeholder="https://..." class="form-control">
+                        <input type="text" id="product-image" class="form-control" placeholder="https://...">
                     </div>
                     
                     <div class="form-group">
-                        <label for="product-active">Statut</label>
-                        <div>
-                            <label style="display: flex; align-items: center; gap: 10px;">
-                                <input type="checkbox" id="product-active" checked style="width: auto;">
-                                Produit actif
-                            </label>
-                        </div>
+                        <label for="product-features">Caractéristiques (une par ligne)</label>
+                        <textarea id="product-features" class="form-control" rows="3" placeholder="Note florale&#10;Longue tenue&#10;Bouteille en verre"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 10px;">
+                            <input type="checkbox" id="product-active" checked style="width: auto;">
+                            Produit actif
+                        </label>
                     </div>
                 </form>
             </div>
@@ -1172,78 +1196,14 @@
             isAuthenticated: false,
             adminToken: null,
             currentUser: null,
-            currentSection: 'dashboard'
-        };
-        
-        // Données de démonstration
-        const DEMO_DATA = {
-            products: [
-                {
-                    id: 1,
-                    name: 'Parfum Élégance',
-                    description: 'Un parfum élégant et raffiné',
-                    price: 89.99,
-                    stock: 50,
-                    category: 'unisex',
-                    image_url: 'https://images.unsplash.com/photo-1541643600914-78b084683601',
-                    is_active: true
-                },
-                {
-                    id: 2,
-                    name: 'Essence de Nuit',
-                    description: 'Un parfum mystérieux et envoûtant',
-                    price: 75.50,
-                    stock: 30,
-                    category: 'men',
-                    image_url: 'https://images.unsplash.com/photo-1590736969956-6d9c2a8d6977',
-                    is_active: true
-                }
-            ],
-            orders: [
-                {
-                    id: 1,
-                    order_number: 'ES2023001',
-                    customer_name: 'Jean Dupont',
-                    date: '2023-10-15',
-                    items: 2,
-                    total: 165.49,
-                    status: 'delivered'
-                },
-                {
-                    id: 2,
-                    order_number: 'ES2023002',
-                    customer_name: 'Marie Martin',
-                    date: '2023-10-16',
-                    items: 1,
-                    total: 89.99,
-                    status: 'processing'
-                }
-            ],
-            users: [
-                {
-                    id: 1,
-                    name: 'Admin System',
-                    email: 'admin@esparfumerie.com',
-                    role: 'admin',
-                    registered: '2023-01-01',
-                    last_login: '2023-10-16'
-                },
-                {
-                    id: 2,
-                    name: 'Jean Dupont',
-                    email: 'jean@email.com',
-                    role: 'user',
-                    registered: '2023-10-01',
-                    last_login: '2023-10-15'
-                }
-            ]
+            currentSection: 'dashboard',
+            products: []
         };
         
         // Initialisation
         document.addEventListener('DOMContentLoaded', function() {
             checkAdminAuth();
             setupEventListeners();
-            loadDemoData();
         });
         
         // Vérifier l'authentification
@@ -1282,9 +1242,7 @@
             }
             
             // Charger les données
-            if (AdminState.currentSection === 'dashboard') {
-                loadDashboardData();
-            }
+            loadDashboardData();
         }
         
         // Configurer les événements
@@ -1354,9 +1312,9 @@
                     showAdminPanel();
                     
                 } else {
-                    // Essayer avec les identifiants par défaut
+                    // Vérifier les identifiants par défaut
                     if (email === 'admin@esparfumerie.com' && password === 'admin123') {
-                        // Créer un token de démonstration
+                        // Mode démo - créer un token local
                         const token = 'demo_admin_token_' + Date.now();
                         const expiry = new Date().getTime() + (24 * 60 * 60 * 1000);
                         
@@ -1396,7 +1354,7 @@
                     
                     showAdminPanel();
                 } else {
-                    showAlert(alert, 'Erreur de connexion au serveur', 'error');
+                    showAlert(alert, 'Erreur de connexion au serveur. Utilisez admin@esparfumerie.com / admin123', 'error');
                 }
             }
         }
@@ -1450,93 +1408,35 @@
             }
         }
         
-        // Charger les données de démonstration
-        function loadDemoData() {
-            // Statistiques
-            document.getElementById('total-products').textContent = DEMO_DATA.products.length;
-            document.getElementById('total-orders').textContent = DEMO_DATA.orders.length;
-            document.getElementById('total-users').textContent = DEMO_DATA.users.length;
-            document.getElementById('total-revenue').textContent = '255.48 €';
-            
-            // Commandes récentes
-            updateRecentOrders(DEMO_DATA.orders);
-            
-            // Produits
-            updateProductsTable(DEMO_DATA.products);
-            
-            // Commandes
-            updateOrdersTable(DEMO_DATA.orders);
-            
-            // Utilisateurs
-            updateUsersTable(DEMO_DATA.users);
-        }
-        
         // Charger les données du dashboard
         async function loadDashboardData() {
             try {
-                // Essayer de charger depuis l'API
+                // Charger les produits pour les statistiques
                 const response = await fetch(`${API_BASE_URL}/api/products`);
                 
                 if (response.ok) {
                     const data = await response.json();
+                    AdminState.products = data.products || [];
                     
                     // Mettre à jour les statistiques
-                    document.getElementById('total-products').textContent = data.count || data.products.length || 0;
+                    document.getElementById('total-products').textContent = AdminState.products.length;
                     
-                    // Pour les autres stats, utiliser des valeurs par défaut
-                    document.getElementById('total-orders').textContent = '2';
-                    document.getElementById('total-users').textContent = '156';
+                    // Calculer les revenus (simulation)
+                    const revenue = AdminState.products.reduce((total, product) => {
+                        return total + (product.price * (product.stock || 0) * 0.1);
+                    }, 0);
                     
-                    const revenue = (data.products || []).reduce((total, product) => {
-                        return total + (product.price * (product.stock || 0));
-                    }, 0) / 100; // Simulation
-                    
-                    document.getElementById('total-revenue').textContent = `${revenue.toFixed(2)} €`;
+                    // Statistiques de démonstration
+                    document.getElementById('total-orders').textContent = Math.floor(Math.random() * 50) + 10;
+                    document.getElementById('total-users').textContent = Math.floor(Math.random() * 100) + 50;
+                    document.getElementById('total-revenue').textContent = revenue.toFixed(2) + ' €';
                     
                 } else {
-                    // Utiliser les données de démonstration
-                    loadDemoData();
+                    console.error('Erreur lors du chargement des produits');
                 }
             } catch (error) {
                 console.error('Erreur:', error);
-                loadDemoData();
             }
-        }
-        
-        // Mettre à jour les commandes récentes
-        function updateRecentOrders(orders) {
-            const tbody = document.getElementById('recent-orders-body');
-            
-            if (!orders || orders.length === 0) {
-                tbody.innerHTML = `
-                    <tr>
-                        <td colspan="5" style="text-align: center; padding: 40px; color: var(--gray-color);">
-                            <i class="fas fa-shopping-cart" style="font-size: 32px; margin-bottom: 10px; display: block;"></i>
-                            Aucune commande récente
-                        </td>
-                    </tr>
-                `;
-                return;
-            }
-            
-            // Limiter à 5 commandes pour le dashboard
-            const recentOrders = orders.slice(0, 5);
-            
-            tbody.innerHTML = recentOrders.map(order => `
-                <tr>
-                    <td><strong>${order.order_number}</strong></td>
-                    <td>${order.customer_name}</td>
-                    <td>${order.date}</td>
-                    <td><strong>${order.total} €</strong></td>
-                    <td>
-                        <span class="status-badge ${order.status === 'delivered' ? 'status-active' : 'status-pending'}">
-                            ${order.status === 'delivered' ? 'Livré' : 
-                              order.status === 'processing' ? 'En traitement' : 
-                              order.status === 'pending' ? 'En attente' : order.status}
-                        </span>
-                    </td>
-                </tr>
-            `).join('');
         }
         
         // Charger les produits
@@ -1546,13 +1446,16 @@
                 
                 if (response.ok) {
                     const data = await response.json();
-                    updateProductsTable(data.products);
+                    AdminState.products = data.products || [];
+                    updateProductsTable(AdminState.products);
                 } else {
-                    updateProductsTable(DEMO_DATA.products);
+                    showAlert(document.getElementById('product-alert'), 
+                             'Erreur lors du chargement des produits', 'error');
                 }
             } catch (error) {
                 console.error('Erreur:', error);
-                updateProductsTable(DEMO_DATA.products);
+                showAlert(document.getElementById('product-alert'), 
+                         'Erreur de connexion au serveur', 'error');
             }
         }
         
@@ -1565,7 +1468,7 @@
                     <tr>
                         <td colspan="7" style="text-align: center; padding: 40px; color: var(--gray-color);">
                             <i class="fas fa-box-open" style="font-size: 32px; margin-bottom: 10px; display: block;"></i>
-                            Aucun produit
+                            Aucun produit disponible
                         </td>
                     </tr>
                 `;
@@ -1584,7 +1487,7 @@
                             <div>
                                 <div style="font-weight: 500;">${product.name}</div>
                                 <div style="font-size: 12px; color: var(--gray-color);">
-                                    ${product.description.substring(0, 50)}...
+                                    ${(product.description || '').substring(0, 50)}...
                                 </div>
                             </div>
                         </div>
@@ -1593,7 +1496,7 @@
                         ${product.category === 'men' ? 'Homme' : 
                           product.category === 'women' ? 'Femme' : 'Unisex'}
                     </td>
-                    <td><strong>${product.price} €</strong></td>
+                    <td><strong>${parseFloat(product.price).toFixed(2)} €</strong></td>
                     <td>
                         <span style="padding: 4px 10px; border-radius: 12px; font-size: 12px; 
                               background: ${product.stock > 10 ? 'rgba(46, 204, 113, 0.1)' : 
@@ -1624,9 +1527,31 @@
         }
         
         // Charger les commandes
-        function loadOrders() {
-            updateOrdersTable(DEMO_DATA.orders);
-            document.getElementById('orders-count').textContent = `${DEMO_DATA.orders.length} commandes`;
+        async function loadOrders() {
+            // Simulation pour l'exemple
+            const orders = [
+                {
+                    id: 1,
+                    order_number: 'ES2023001',
+                    customer_name: 'Jean Dupont',
+                    date: '2023-10-15',
+                    items: 2,
+                    total: 165.49,
+                    status: 'delivered'
+                },
+                {
+                    id: 2,
+                    order_number: 'ES2023002',
+                    customer_name: 'Marie Martin',
+                    date: '2023-10-16',
+                    items: 1,
+                    total: 89.99,
+                    status: 'processing'
+                }
+            ];
+            
+            updateOrdersTable(orders);
+            document.getElementById('orders-count').textContent = `${orders.length} commandes`;
         }
         
         // Mettre à jour la table des commandes
@@ -1671,9 +1596,29 @@
         }
         
         // Charger les utilisateurs
-        function loadUsers() {
-            updateUsersTable(DEMO_DATA.users);
-            document.getElementById('users-count').textContent = `${DEMO_DATA.users.length} utilisateurs`;
+        async function loadUsers() {
+            // Simulation pour l'exemple
+            const users = [
+                {
+                    id: 1,
+                    name: 'Admin System',
+                    email: 'admin@esparfumerie.com',
+                    role: 'admin',
+                    registered: '2023-01-01',
+                    last_login: '2023-10-16'
+                },
+                {
+                    id: 2,
+                    name: 'Jean Dupont',
+                    email: 'jean@email.com',
+                    role: 'user',
+                    registered: '2023-10-01',
+                    last_login: '2023-10-15'
+                }
+            ];
+            
+            updateUsersTable(users);
+            document.getElementById('users-count').textContent = `${users.length} utilisateurs`;
         }
         
         // Mettre à jour la table des utilisateurs
@@ -1728,23 +1673,25 @@
         function showProductModal(product = null) {
             const modal = document.getElementById('product-modal');
             const title = document.getElementById('product-modal-title');
-            const form = document.getElementById('product-form');
             
             if (product) {
                 title.textContent = 'Modifier le produit';
                 document.getElementById('product-id').value = product.id;
                 document.getElementById('product-name').value = product.name;
-                document.getElementById('product-description').value = product.description;
+                document.getElementById('product-description').value = product.description || '';
                 document.getElementById('product-price').value = product.price;
-                document.getElementById('product-stock').value = product.stock;
-                document.getElementById('product-category').value = product.category;
+                document.getElementById('product-stock').value = product.stock || 0;
+                document.getElementById('product-category').value = product.category || '';
                 document.getElementById('product-image').value = product.image_url || '';
+                document.getElementById('product-features').value = product.features ? 
+                    (Array.isArray(product.features) ? product.features.join('\n') : product.features) : '';
                 document.getElementById('product-active').checked = product.is_active !== false;
             } else {
                 title.textContent = 'Ajouter un produit';
-                form.reset();
+                document.getElementById('product-form').reset();
                 document.getElementById('product-id').value = '';
                 document.getElementById('product-active').checked = true;
+                document.getElementById('product-stock').value = 0;
             }
             
             modal.classList.add('active');
@@ -1764,12 +1711,25 @@
                 stock: parseInt(document.getElementById('product-stock').value),
                 category: document.getElementById('product-category').value,
                 image_url: document.getElementById('product-image').value || '',
+                features: document.getElementById('product-features').value
+                    .split('\n')
+                    .filter(f => f.trim() !== ''),
                 is_active: document.getElementById('product-active').checked
             };
             
             // Validation
             if (!productData.name || !productData.description || !productData.price || !productData.category) {
-                showAlert(document.getElementById('product-alert'), 'Veuillez remplir tous les champs obligatoires', 'error');
+                showAlert(document.getElementById('product-alert'), 'Veuillez remplir tous les champs obligatoires (*)', 'error');
+                return;
+            }
+            
+            if (isNaN(productData.price) || productData.price <= 0) {
+                showAlert(document.getElementById('product-alert'), 'Le prix doit être un nombre positif', 'error');
+                return;
+            }
+            
+            if (isNaN(productData.stock) || productData.stock < 0) {
+                showAlert(document.getElementById('product-alert'), 'Le stock doit être un nombre positif ou zéro', 'error');
                 return;
             }
             
@@ -1803,28 +1763,28 @@
                 if (response.ok) {
                     hideProductModal();
                     showAlert(document.getElementById('product-alert'), 
-                             'Produit enregistré avec succès', 'success');
+                             '✅ Produit enregistré avec succès', 'success');
                     
                     // Recharger les produits
-                    loadProducts();
-                    
-                    // Mettre à jour le dashboard
-                    if (AdminState.currentSection === 'dashboard') {
+                    setTimeout(() => {
+                        loadProducts();
                         loadDashboardData();
-                    }
+                        
+                        // Notifier le frontend pour recharger les produits
+                        if (window.opener) {
+                            window.opener.postMessage({ type: 'RELOAD_PRODUCTS' }, '*');
+                        }
+                    }, 500);
+                    
                 } else {
+                    const errorData = await response.json();
                     showAlert(document.getElementById('product-alert'), 
-                             'Erreur lors de l\'enregistrement', 'error');
+                             `❌ Erreur: ${errorData.error || 'Erreur lors de l\'enregistrement'}`, 'error');
                 }
             } catch (error) {
                 console.error('Erreur:', error);
-                // Mode démo
-                hideProductModal();
                 showAlert(document.getElementById('product-alert'), 
-                         'Produit enregistré (mode démo)', 'success');
-                
-                // Recharger les produits en mode démo
-                setTimeout(() => loadProducts(), 500);
+                         '❌ Erreur de connexion au serveur', 'error');
             }
         }
         
@@ -1837,25 +1797,19 @@
                     const data = await response.json();
                     showProductModal(data.product);
                 } else {
-                    // Mode démo - trouver le produit dans les données de démo
-                    const product = DEMO_DATA.products.find(p => p.id == productId);
-                    if (product) {
-                        showProductModal(product);
-                    }
+                    showAlert(document.getElementById('product-alert'), 
+                             'Produit non trouvé', 'error');
                 }
             } catch (error) {
                 console.error('Erreur:', error);
-                // Mode démo
-                const product = DEMO_DATA.products.find(p => p.id == productId);
-                if (product) {
-                    showProductModal(product);
-                }
+                showAlert(document.getElementById('product-alert'), 
+                         'Erreur de connexion au serveur', 'error');
             }
         }
         
         // Supprimer un produit
         async function deleteProduct(productId) {
-            if (!confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')) {
+            if (!confirm('Êtes-vous sûr de vouloir supprimer ce produit ? Cette action est irréversible.')) {
                 return;
             }
             
@@ -1872,27 +1826,28 @@
                 
                 if (response.ok) {
                     showAlert(document.getElementById('product-alert'), 
-                             'Produit supprimé avec succès', 'success');
+                             '✅ Produit supprimé avec succès', 'success');
                     
                     // Recharger les produits
-                    setTimeout(() => loadProducts(), 500);
+                    setTimeout(() => {
+                        loadProducts();
+                        loadDashboardData();
+                        
+                        // Notifier le frontend pour recharger les produits
+                        if (window.opener) {
+                            window.opener.postMessage({ type: 'RELOAD_PRODUCTS' }, '*');
+                        }
+                    }, 500);
                     
-                    // Mettre à jour le dashboard
-                    if (AdminState.currentSection === 'dashboard') {
-                        setTimeout(() => loadDashboardData(), 500);
-                    }
                 } else {
+                    const errorData = await response.json();
                     showAlert(document.getElementById('product-alert'), 
-                             'Erreur lors de la suppression', 'error');
+                             `❌ Erreur: ${errorData.error || 'Erreur lors de la suppression'}`, 'error');
                 }
             } catch (error) {
                 console.error('Erreur:', error);
-                // Mode démo
                 showAlert(document.getElementById('product-alert'), 
-                         'Produit supprimé (mode démo)', 'success');
-                
-                // Recharger les produits en mode démo
-                setTimeout(() => loadProducts(), 500);
+                         '❌ Erreur de connexion au serveur', 'error');
             }
         }
         
@@ -1900,7 +1855,7 @@
         function handleSettingsSubmit(e) {
             e.preventDefault();
             showAlert(document.getElementById('settings-alert'), 
-                     'Paramètres enregistrés avec succès', 'success');
+                     '✅ Paramètres enregistrés avec succès', 'success');
         }
         
         // Fonctions auxiliaires
