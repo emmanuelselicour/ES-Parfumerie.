@@ -305,3 +305,57 @@ function initLanguage() {
             '#register-tab label[for="register-name"]': 'fullName',
             '#register-tab label[for="register-email"]': 'email',
             '#register-tab label[for="register-password"]': 'password',
+            '#register-tab label[for="register-confirm"]': 'confirmPassword',
+            '#register-tab button': 'registerButton',
+            '#login-tab .modal-text a': 'signUp',
+            '#register-tab .modal-text a': 'signIn',
+            '#login-tab .modal-text': 'noAccount',
+            '#register-tab .modal-text': 'hasAccount'
+        };
+        
+        for (const selector in elementsToTranslate) {
+            const element = document.querySelector(selector);
+            const key = elementsToTranslate[selector];
+            
+            if (element && translation[key]) {
+                if (selector.includes('INPUT') && !selector.includes('button')) {
+                    element.placeholder = translation[key];
+                } else if (selector.includes('.modal-text')) {
+                    // Gérer les textes avec des liens
+                    const text = translation[key];
+                    const linkText = selector.includes('#login-tab') ? translation['signUp'] : translation['signIn'];
+                    
+                    if (selector.includes('#login-tab')) {
+                        element.innerHTML = `${text} <a href="#" class="switch-tab" data-tab="register">${linkText}</a>`;
+                    } else {
+                        element.innerHTML = `${text} <a href="#" class="switch-tab" data-tab="login">${linkText}</a>`;
+                    }
+                    
+                    // Réattacher les événements
+                    const link = element.querySelector('.switch-tab');
+                    if (link) {
+                        link.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            const tabId = link.dataset.tab;
+                            
+                            const tabButtons = document.querySelectorAll('.tab-btn');
+                            tabButtons.forEach(btn => btn.classList.remove('active'));
+                            document.querySelector(`.tab-btn[data-tab="${tabId}"]`).classList.add('active');
+                            
+                            document.querySelectorAll('.tab-content').forEach(content => {
+                                content.classList.remove('active');
+                            });
+                            
+                            document.getElementById(`${tabId}-tab`).classList.add('active');
+                        });
+                    }
+                } else {
+                    element.textContent = translation[key];
+                }
+            }
+        }
+    }
+    
+    // Exposer la fonction globalement
+    window.setLanguage = setLanguage;
+}
