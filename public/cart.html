@@ -11,7 +11,7 @@
         .cart-container {
             padding: var(--space-xl) 0;
             background-color: var(--bg-light);
-            min-height: 60vh;
+            min-height: 70vh;
         }
         
         .cart-header {
@@ -29,6 +29,7 @@
             display: grid;
             grid-template-columns: 2fr 1fr;
             gap: var(--space-xl);
+            min-height: 400px;
         }
         
         .cart-items {
@@ -66,6 +67,7 @@
             border-radius: var(--radius);
             overflow: hidden;
             flex-shrink: 0;
+            background: #f5f5f5;
         }
         
         .cart-item-image img {
@@ -146,6 +148,9 @@
             cursor: pointer;
             font-size: 1.1rem;
             transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .cart-item-remove:hover {
@@ -181,6 +186,11 @@
             text-align: center;
             padding: var(--space-xl);
             grid-column: 1 / -1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
         }
         
         .cart-empty i {
@@ -208,6 +218,8 @@
         .checkout-btn {
             width: 100%;
             margin-top: var(--space-lg);
+            padding: 15px;
+            font-size: 1.1rem;
         }
         
         .coupon-section {
@@ -229,9 +241,51 @@
             font-size: 1rem;
         }
         
+        .alert {
+            padding: 15px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            display: none;
+            font-size: 14px;
+        }
+        
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .cart-loading {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px;
+            color: var(--text-light);
+        }
+        
+        .cart-loading i {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
         @media (max-width: 1024px) {
             .cart-content {
                 grid-template-columns: 1fr;
+            }
+            
+            .cart-summary {
+                position: static;
             }
         }
         
@@ -249,11 +303,15 @@
             .cart-item-remove {
                 margin: 0;
             }
+            
+            .cart-header h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header (identique au site principal) -->
+    <!-- Header -->
     <header>
         <div class="container">
             <nav>
@@ -309,9 +367,15 @@
                 <p>Vérifiez vos articles avant de procéder au paiement</p>
             </div>
             
+            <div class="alert" id="cart-alert"></div>
+            
             <div class="cart-content" id="cart-content">
-                <!-- Le contenu du panier sera chargé dynamiquement -->
-                <div class="cart-empty" id="cart-empty">
+                <div class="cart-loading" id="cart-loading">
+                    <i class="fas fa-spinner"></i>
+                    <p>Chargement de votre panier...</p>
+                </div>
+                
+                <div class="cart-empty" id="cart-empty" style="display: none;">
                     <i class="fas fa-shopping-bag"></i>
                     <h2>Votre panier est vide</h2>
                     <p>Parcourez notre collection et ajoutez vos parfums préférés</p>
@@ -327,7 +391,7 @@
         </div>
     </main>
 
-    <!-- Footer (identique au site principal) -->
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -385,7 +449,7 @@
         </div>
     </footer>
 
-    <!-- Modals (identique au site principal) -->
+    <!-- Modals -->
     <div class="modal" id="login-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -439,349 +503,636 @@
                     </div>
                     <div class="form-group">
                         <input type="email" id="signup-email" placeholder=" " required>
-                        <label for="signup-email">Adresse email</label>
+                            <label for="signup-email">Adresse email</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="signup-password" placeholder=" " required>
+                            <label for="signup-password">Mot de passe</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="signup-confirm" placeholder=" " required>
+                            <label for="signup-confirm">Confirmer le mot de passe</label>
+                        </div>
+                        <div class="form-options">
+                            <label class="checkbox">
+                                <input type="checkbox" id="terms" required>
+                                <span>J'accepte les <a href="#">conditions d'utilisation</a></span>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn-primary">Créer mon compte</button>
+                    </form>
+                    <div class="modal-footer">
+                        <p>Vous avez déjà un compte?</p>
+                        <button id="switch-to-login" class="btn-text">Se connecter</button>
                     </div>
-                    <div class="form-group">
-                        <input type="password" id="signup-password" placeholder=" " required>
-                        <label for="signup-password">Mot de passe</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" id="signup-confirm" placeholder=" " required>
-                        <label for="signup-confirm">Confirmer le mot de passe</label>
-                    </div>
-                    <div class="form-options">
-                        <label class="checkbox">
-                            <input type="checkbox" id="terms" required>
-                            <span>J'accepte les <a href="#">conditions d'utilisation</a></span>
-                        </label>
-                    </div>
-                    <button type="submit" class="btn-primary">Créer mon compte</button>
-                </form>
-                <div class="modal-footer">
-                    <p>Vous avez déjà un compte?</p>
-                    <button id="switch-to-login" class="btn-text">Se connecter</button>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script>
-        // Gestion du panier
-        const CartState = {
-            items: [],
-            total: 0,
-            subtotal: 0,
-            shipping: 5.99,
-            taxRate: 0.2 // 20% TVA
-        };
-
-        // Initialisation
-        document.addEventListener('DOMContentLoaded', function() {
-            loadCart();
-            setupEventListeners();
-        });
-
-        // Charger le panier depuis localStorage
-        function loadCart() {
-            const savedCart = localStorage.getItem('es-parfumerie-cart');
+        <script>
+            // Configuration API
+            const API_BASE_URL = 'https://es-parfumerie-backend.onrender.com';
             
-            if (savedCart) {
-                try {
-                    const cartData = JSON.parse(savedCart);
-                    
-                    // Pour l'exemple, on utilise des produits fictifs
-                    // En production, vous chargeriez les produits depuis l'API
-                    CartState.items = cartData.items || [];
-                    calculateTotals();
-                    displayCart();
-                } catch (error) {
-                    console.error('Erreur lors du chargement du panier:', error);
-                }
-            }
-        }
-
-        // Calculer les totaux
-        function calculateTotals() {
-            CartState.subtotal = CartState.items.reduce((total, item) => {
-                return total + (item.price * item.quantity);
-            }, 0);
-            
-            CartState.tax = CartState.subtotal * CartState.taxRate;
-            CartState.total = CartState.subtotal + CartState.shipping + CartState.tax;
-        }
-
-        // Afficher le panier
-        function displayCart() {
-            const cartContent = document.getElementById('cart-content');
-            const cartEmpty = document.getElementById('cart-empty');
-            
-            if (!cartContent || !cartEmpty) return;
-
-            if (CartState.items.length === 0) {
-                cartEmpty.style.display = 'block';
-                cartContent.innerHTML = '';
-                cartContent.appendChild(cartEmpty);
-                return;
-            }
-
-            cartEmpty.style.display = 'none';
-
-            const cartItemsHTML = CartState.items.map(item => `
-                <div class="cart-item" data-id="${item.id}">
-                    <div class="cart-item-image">
-                        <img src="${item.image || 'https://via.placeholder.com/120'}" alt="${item.name}">
-                    </div>
-                    <div class="cart-item-details">
-                        <div class="cart-item-name">${item.name}</div>
-                        <div class="cart-item-category">
-                            ${item.category === 'men' ? 'Homme' : 
-                              item.category === 'women' ? 'Femme' : 'Unisex'}
-                        </div>
-                        <div class="cart-item-price">${item.price.toFixed(2)} €</div>
-                        <div class="cart-item-quantity">
-                            <button class="quantity-btn minus" onclick="updateQuantity(${item.id}, -1)">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <input type="number" class="quantity-input" 
-                                   value="${item.quantity}" min="1" max="${item.stock || 99}"
-                                   onchange="updateQuantityInput(${item.id}, this.value)">
-                            <button class="quantity-btn plus" onclick="updateQuantity(${item.id}, 1)">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <button class="cart-item-remove" onclick="removeItem(${item.id})">
-                        <i class="fas fa-trash"></i> Supprimer
-                    </button>
-                </div>
-            `).join('');
-
-            const summaryHTML = `
-                <div class="cart-summary">
-                    <div class="summary-title">Résumé de la commande</div>
-                    <div class="summary-row">
-                        <span>Sous-total</span>
-                        <span>${CartState.subtotal.toFixed(2)} €</span>
-                    </div>
-                    <div class="summary-row">
-                        <span>Livraison</span>
-                        <span>${CartState.shipping.toFixed(2)} €</span>
-                    </div>
-                    <div class="summary-row">
-                        <span>TVA (20%)</span>
-                        <span>${CartState.tax.toFixed(2)} €</span>
-                    </div>
-                    <div class="summary-row summary-total">
-                        <span>Total</span>
-                        <span>${CartState.total.toFixed(2)} €</span>
-                    </div>
-                    
-                    <div class="coupon-section">
-                        <div class="coupon-form">
-                            <input type="text" placeholder="Code promo">
-                            <button type="button" class="btn-outline">Appliquer</button>
-                        </div>
-                    </div>
-                    
-                    <button class="btn-primary checkout-btn" onclick="proceedToCheckout()">
-                        <i class="fas fa-lock"></i> Procéder au paiement
-                    </button>
-                    
-                    <p style="text-align: center; margin-top: 15px; font-size: 0.9rem; color: var(--text-light);">
-                        <i class="fas fa-shield-alt"></i> Paiement sécurisé SSL
-                    </p>
-                </div>
-            `;
-
-            cartContent.innerHTML = `
-                <div class="cart-items">
-                    ${cartItemsHTML}
-                </div>
-                ${summaryHTML}
-            `;
-
-            // Mettre à jour le compteur du panier dans le header
-            updateCartCount();
-        }
-
-        // Mettre à jour la quantité (boutons +/-)
-        function updateQuantity(itemId, change) {
-            const itemIndex = CartState.items.findIndex(item => item.id === itemId);
-            
-            if (itemIndex !== -1) {
-                const newQuantity = CartState.items[itemIndex].quantity + change;
-                
-                if (newQuantity < 1) {
-                    removeItem(itemId);
-                    return;
-                }
-                
-                // Vérifier le stock maximum
-                const maxStock = CartState.items[itemIndex].stock || 99;
-                if (newQuantity > maxStock) {
-                    alert(`Stock limité à ${maxStock} unités`);
-                    return;
-                }
-                
-                CartState.items[itemIndex].quantity = newQuantity;
-                saveCart();
-                calculateTotals();
-                displayCart();
-            }
-        }
-
-        // Mettre à jour la quantité (input)
-        function updateQuantityInput(itemId, value) {
-            const quantity = parseInt(value);
-            
-            if (isNaN(quantity) || quantity < 1) {
-                return;
-            }
-            
-            const itemIndex = CartState.items.findIndex(item => item.id === itemId);
-            
-            if (itemIndex !== -1) {
-                // Vérifier le stock maximum
-                const maxStock = CartState.items[itemIndex].stock || 99;
-                if (quantity > maxStock) {
-                    alert(`Stock limité à ${maxStock} unités`);
-                    CartState.items[itemIndex].quantity = maxStock;
-                } else {
-                    CartState.items[itemIndex].quantity = quantity;
-                }
-                
-                saveCart();
-                calculateTotals();
-                displayCart();
-            }
-        }
-
-        // Supprimer un article
-        function removeItem(itemId) {
-            if (confirm('Êtes-vous sûr de vouloir supprimer cet article du panier ?')) {
-                CartState.items = CartState.items.filter(item => item.id !== itemId);
-                saveCart();
-                calculateTotals();
-                displayCart();
-            }
-        }
-
-        // Sauvegarder le panier
-        function saveCart() {
-            const cartData = {
-                items: CartState.items,
-                timestamp: new Date().getTime()
+            // État du panier
+            const CartState = {
+                items: [],
+                subtotal: 0,
+                shipping: 5.99,
+                taxRate: 0.2,
+                isLoading: true
             };
             
-            localStorage.setItem('es-parfumerie-cart', JSON.stringify(cartData));
-        }
-
-        // Mettre à jour le compteur du panier
-        function updateCartCount() {
-            const cartCount = document.querySelector('.cart-count');
-            if (cartCount) {
-                const totalItems = CartState.items.reduce((total, item) => total + item.quantity, 0);
-                cartCount.textContent = totalItems;
-            }
-        }
-
-        // Procéder au paiement
-        function proceedToCheckout() {
-            // Vérifier si l'utilisateur est connecté
-            const currentUser = localStorage.getItem('es-parfumerie-user');
+            // Utilisateur courant
+            let currentUser = null;
             
-            if (!currentUser) {
-                alert('Vous devez être connecté pour passer commande.');
-                openModal('login-modal');
-                return;
-            }
-            
-            if (CartState.items.length === 0) {
-                alert('Votre panier est vide.');
-                return;
-            }
-            
-            // Rediriger vers la page de paiement
-            alert('Redirection vers la page de paiement...');
-            // window.location.href = 'checkout.html';
-        }
-
-        // Configurer les événements
-        function setupEventListeners() {
-            // Mode sombre
-            const themeToggle = document.getElementById('theme-toggle');
-            if (themeToggle) {
-                themeToggle.addEventListener('click', toggleDarkMode);
-            }
-            
-            // Langue
-            const languageSelect = document.getElementById('language-select');
-            if (languageSelect) {
-                languageSelect.addEventListener('change', function() {
-                    // Ici, vous implémenteriez le changement de langue
-                    alert(`Langue changée en ${this.value}`);
-                });
-            }
-            
-            // Modal connexion
-            const loginBtn = document.getElementById('login-btn');
-            if (loginBtn) {
-                loginBtn.addEventListener('click', () => openModal('login-modal'));
-            }
-            
-            // Modal inscription
-            const signupBtn = document.getElementById('signup-btn');
-            if (signupBtn) {
-                signupBtn.addEventListener('click', () => openModal('signup-modal'));
-            }
-            
-            // Basculer entre modals
-            document.getElementById('switch-to-signup')?.addEventListener('click', () => {
-                closeModal('login-modal');
-                openModal('signup-modal');
+            // Initialisation
+            document.addEventListener('DOMContentLoaded', async function() {
+                // Initialiser l'année
+                document.getElementById('current-year').textContent = new Date().getFullYear();
+                
+                // Charger l'utilisateur
+                loadCurrentUser();
+                
+                // Charger le panier
+                await loadCart();
+                
+                // Configurer les événements
+                setupEventListeners();
+                
+                // Afficher le panier
+                displayCart();
             });
             
-            document.getElementById('switch-to-login')?.addEventListener('click', () => {
-                closeModal('signup-modal');
-                openModal('login-modal');
-            });
-            
-            // Fermer modals
-            document.querySelectorAll('.close-modal').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const modal = this.closest('.modal');
-                    if (modal) {
-                        closeModal(modal.id);
+            // Charger l'utilisateur courant
+            function loadCurrentUser() {
+                const userData = localStorage.getItem('es-parfumerie-user');
+                if (userData) {
+                    try {
+                        currentUser = JSON.parse(userData);
+                        updateAuthButtons();
+                    } catch (error) {
+                        console.error('❌ Erreur lors du chargement de l\'utilisateur:', error);
                     }
+                }
+            }
+            
+            // Mettre à jour les boutons d'authentification
+            function updateAuthButtons() {
+                const authButtons = document.querySelector('.auth-buttons');
+                if (authButtons) {
+                    if (currentUser) {
+                        authButtons.innerHTML = `
+                            <button id="logout-btn" class="btn-outline">Déconnexion</button>
+                            <span style="padding: 8px 12px; color: var(--primary-color); font-weight: 500;">
+                                ${currentUser.firstName || currentUser.email}
+                            </span>
+                        `;
+                        document.getElementById('logout-btn')?.addEventListener('click', logoutUser);
+                    } else {
+                        authButtons.innerHTML = `
+                            <button id="login-btn" class="btn-outline">Connexion</button>
+                            <button id="signup-btn" class="btn-primary">Inscription</button>
+                        `;
+                    }
+                }
+            }
+            
+            // Déconnecter l'utilisateur
+            function logoutUser() {
+                localStorage.removeItem('es-parfumerie-token');
+                localStorage.removeItem('es-parfumerie-user');
+                localStorage.removeItem('es-parfumerie-remember');
+                currentUser = null;
+                updateAuthButtons();
+                showAlert('Déconnexion réussie', 'success');
+                location.reload();
+            }
+            
+            // Charger le panier depuis localStorage + API
+            async function loadCart() {
+                CartState.isLoading = true;
+                updateLoadingState();
+                
+                const savedCart = localStorage.getItem('es-parfumerie-cart');
+                
+                if (!savedCart) {
+                    CartState.items = [];
+                    CartState.isLoading = false;
+                    return;
+                }
+        
+                try {
+                    const cartData = JSON.parse(savedCart);
+                    const cartItems = cartData.items || [];
+                    
+                    if (cartItems.length === 0) {
+                        CartState.items = [];
+                        CartState.isLoading = false;
+                        return;
+                    }
+        
+                    // Récupérer les IDs des produits
+                    const productIds = cartItems.map(item => item.productId);
+                    
+                    // Récupérer les produits depuis l'API
+                    const response = await fetch(`${API_BASE_URL}/api/products/by-ids`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ ids: productIds })
+                    });
+        
+                    if (response.ok) {
+                        const data = await response.json();
+                        const products = data.products || [];
+                        
+                        // Reconstruire le panier
+                        CartState.items = cartItems.map(cartItem => {
+                            const product = products.find(p => p.id == cartItem.productId);
+                            if (product) {
+                                return {
+                                    product: product,
+                                    quantity: cartItem.quantity
+                                };
+                            }
+                            return null;
+                        }).filter(item => item !== null);
+                        
+                        console.log('🛒 Panier chargé:', CartState.items.length, 'articles');
+                        
+                    } else {
+                        CartState.items = [];
+                        showAlert('Erreur lors du chargement du panier', 'error');
+                    }
+                } catch (error) {
+                    console.error('❌ Erreur:', error);
+                    CartState.items = [];
+                    showAlert('Erreur de connexion au serveur', 'error');
+                }
+                
+                CartState.isLoading = false;
+                updateCartCount();
+            }
+            
+            // Mettre à jour l'état de chargement
+            function updateLoadingState() {
+                const loadingDiv = document.getElementById('cart-loading');
+                const emptyDiv = document.getElementById('cart-empty');
+                
+                if (CartState.isLoading) {
+                    if (loadingDiv) loadingDiv.style.display = 'block';
+                    if (emptyDiv) emptyDiv.style.display = 'none';
+                } else {
+                    if (loadingDiv) loadingDiv.style.display = 'none';
+                }
+            }
+            
+            // Calculer les totaux
+            function calculateTotals() {
+                CartState.subtotal = CartState.items.reduce((total, item) => {
+                    return total + (item.product.price * item.quantity);
+                }, 0);
+                
+                CartState.tax = CartState.subtotal * CartState.taxRate;
+                CartState.shipping = CartState.subtotal > 100 ? 0 : 5.99; // Livraison gratuite > 100€
+                CartState.total = CartState.subtotal + CartState.shipping + CartState.tax;
+            }
+            
+            // Afficher le panier
+            function displayCart() {
+                const cartContent = document.getElementById('cart-content');
+                const cartEmpty = document.getElementById('cart-empty');
+                
+                if (!cartContent || !cartEmpty) return;
+        
+                if (CartState.items.length === 0) {
+                    cartEmpty.style.display = 'flex';
+                    cartContent.innerHTML = '';
+                    cartContent.appendChild(cartEmpty);
+                    return;
+                }
+        
+                cartEmpty.style.display = 'none';
+                calculateTotals();
+        
+                const cartItemsHTML = CartState.items.map(item => `
+                    <div class="cart-item" data-id="${item.product.id}">
+                        <div class="cart-item-image">
+                            <img src="${item.product.image_url || item.product.image || 'https://via.placeholder.com/120'}" 
+                                 alt="${item.product.name}"
+                                 onerror="this.src='https://via.placeholder.com/120'">
+                        </div>
+                        <div class="cart-item-details">
+                            <div class="cart-item-name">${item.product.name}</div>
+                            <div class="cart-item-category">
+                                ${item.product.category === 'men' ? 'Homme' : 
+                                  item.product.category === 'women' ? 'Femme' : 'Unisex'}
+                            </div>
+                            <div class="cart-item-price">${item.product.price.toFixed(2)} €</div>
+                            <div class="cart-item-quantity">
+                                <button class="quantity-btn minus" onclick="updateQuantity(${item.product.id}, -1)">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <input type="number" class="quantity-input" 
+                                       value="${item.quantity}" min="1" max="${item.product.stock}"
+                                       onchange="updateQuantityInput(${item.product.id}, this.value)">
+                                <button class="quantity-btn plus" onclick="updateQuantity(${item.product.id}, 1)">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button class="cart-item-remove" onclick="removeItem(${item.product.id})">
+                            <i class="fas fa-trash"></i> Supprimer
+                        </button>
+                    </div>
+                `).join('');
+        
+                const summaryHTML = `
+                    <div class="cart-summary">
+                        <div class="summary-title">Résumé de la commande</div>
+                        <div class="summary-row">
+                            <span>Sous-total (${CartState.items.reduce((total, item) => total + item.quantity, 0)} articles)</span>
+                            <span>${CartState.subtotal.toFixed(2)} €</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Livraison</span>
+                            <span>${CartState.shipping.toFixed(2)} €</span>
+                            ${CartState.shipping === 0 ? '<small style="color: #2ecc71; font-size: 12px;">(Livraison gratuite)</small>' : ''}
+                        </div>
+                        <div class="summary-row">
+                            <span>TVA (20%)</span>
+                            <span>${CartState.tax.toFixed(2)} €</span>
+                        </div>
+                        <div class="summary-row summary-total">
+                            <span>Total</span>
+                            <span>${CartState.total.toFixed(2)} €</span>
+                        </div>
+                        
+                        <div class="coupon-section">
+                            <div class="coupon-form">
+                                <input type="text" id="coupon-code" placeholder="Code promo">
+                                <button type="button" class="btn-outline" onclick="applyCoupon()">Appliquer</button>
+                            </div>
+                        </div>
+                        
+                        <button class="btn-primary checkout-btn" onclick="proceedToCheckout()">
+                            <i class="fas fa-lock"></i> Procéder au paiement
+                        </button>
+                        
+                        <p style="text-align: center; margin-top: 15px; font-size: 0.9rem; color: var(--text-light);">
+                            <i class="fas fa-shield-alt"></i> Paiement sécurisé SSL
+                        </p>
+                    </div>
+                `;
+        
+                cartContent.innerHTML = `
+                    <div class="cart-items">
+                        ${cartItemsHTML}
+                    </div>
+                    ${summaryHTML}
+                `;
+        
+                updateCartCount();
+            }
+            
+            // Mettre à jour la quantité
+            function updateQuantity(itemId, change) {
+                const itemIndex = CartState.items.findIndex(item => item.product.id == itemId);
+                
+                if (itemIndex !== -1) {
+                    const newQuantity = CartState.items[itemIndex].quantity + change;
+                    
+                    if (newQuantity < 1) {
+                        removeItem(itemId);
+                        return;
+                    }
+                    
+                    // Vérifier le stock maximum
+                    const maxStock = CartState.items[itemIndex].product.stock || 99;
+                    if (newQuantity > maxStock) {
+                        showAlert(`Stock limité à ${maxStock} unités`, 'error');
+                        return;
+                    }
+                    
+                    CartState.items[itemIndex].quantity = newQuantity;
+                    saveCart();
+                    calculateTotals();
+                    displayCart();
+                    showAlert('Quantité mise à jour', 'success');
+                }
+            }
+            
+            function updateQuantityInput(itemId, value) {
+                const quantity = parseInt(value);
+                
+                if (isNaN(quantity) || quantity < 1) {
+                    return;
+                }
+                
+                const itemIndex = CartState.items.findIndex(item => item.product.id == itemId);
+                
+                if (itemIndex !== -1) {
+                    const maxStock = CartState.items[itemIndex].product.stock || 99;
+                    if (quantity > maxStock) {
+                        showAlert(`Stock limité à ${maxStock} unités`, 'error');
+                        CartState.items[itemIndex].quantity = maxStock;
+                    } else {
+                        CartState.items[itemIndex].quantity = quantity;
+                    }
+                    
+                    saveCart();
+                    calculateTotals();
+                    displayCart();
+                    showAlert('Quantité mise à jour', 'success');
+                }
+            }
+            
+            // Supprimer un article
+            function removeItem(itemId) {
+                if (confirm('Êtes-vous sûr de vouloir supprimer cet article du panier ?')) {
+                    CartState.items = CartState.items.filter(item => item.product.id != itemId);
+                    saveCart();
+                    calculateTotals();
+                    displayCart();
+                    showAlert('Produit retiré du panier', 'success');
+                }
+            }
+            
+            // Sauvegarder le panier
+            function saveCart() {
+                const cartData = {
+                    items: CartState.items.map(item => ({
+                        productId: item.product.id,
+                        quantity: item.quantity
+                    })),
+                    timestamp: new Date().getTime()
+                };
+                
+                localStorage.setItem('es-parfumerie-cart', JSON.stringify(cartData));
+                updateCartCount();
+            }
+            
+            // Mettre à jour le compteur
+            function updateCartCount() {
+                const cartCount = document.querySelector('.cart-count');
+                if (cartCount) {
+                    const totalItems = CartState.items.reduce((total, item) => total + item.quantity, 0);
+                    cartCount.textContent = totalItems;
+                }
+            }
+            
+            // Appliquer un coupon
+            function applyCoupon() {
+                const couponCode = document.getElementById('coupon-code').value;
+                if (couponCode === 'ES10') {
+                    CartState.subtotal = CartState.subtotal * 0.9; // 10% de réduction
+                    calculateTotals();
+                    displayCart();
+                    showAlert('Coupon ES10 appliqué ! 10% de réduction', 'success');
+                } else if (couponCode) {
+                    showAlert('Code promo invalide', 'error');
+                }
+            }
+            
+            // Procéder au paiement
+            async function proceedToCheckout() {
+                // Vérifier si l'utilisateur est connecté
+                if (!currentUser) {
+                    showAlert('Vous devez être connecté pour passer commande', 'error');
+                    openModal('login-modal');
+                    return;
+                }
+                
+                if (CartState.items.length === 0) {
+                    showAlert('Votre panier est vide', 'error');
+                    return;
+                }
+                
+                // Vérifier le stock avant de procéder
+                try {
+                    // Récupérer les produits pour vérifier le stock
+                    const productIds = CartState.items.map(item => item.product.id);
+                    const response = await fetch(`${API_BASE_URL}/api/products/by-ids`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ ids: productIds })
+                    });
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        const products = data.products || [];
+                        
+                        // Vérifier le stock pour chaque produit
+                        for (const item of CartState.items) {
+                            const product = products.find(p => p.id == item.product.id);
+                            if (product && item.quantity > product.stock) {
+                                showAlert(`${item.product.name} : stock insuffisant. Il reste ${product.stock} unités.`, 'error');
+                                return;
+                            }
+                        }
+                        
+                        // Stock OK, procéder au paiement
+                        showAlert('Redirection vers la page de paiement...', 'success');
+                        // window.location.href = 'checkout.html';
+                        
+                    } else {
+                        showAlert('Erreur de vérification du stock', 'error');
+                    }
+                } catch (error) {
+                    console.error('❌ Erreur:', error);
+                    showAlert('Erreur de connexion au serveur', 'error');
+                }
+            }
+            
+            // Afficher une alerte
+            function showAlert(message, type = 'success') {
+                const alertDiv = document.getElementById('cart-alert');
+                if (alertDiv) {
+                    alertDiv.textContent = message;
+                    alertDiv.className = `alert alert-${type}`;
+                    alertDiv.style.display = 'block';
+                    
+                    setTimeout(() => {
+                        alertDiv.style.display = 'none';
+                    }, 3000);
+                }
+            }
+            
+            // Configurer les événements
+            function setupEventListeners() {
+                // Mode sombre
+                const themeToggle = document.getElementById('theme-toggle');
+                if (themeToggle) {
+                    themeToggle.addEventListener('click', toggleDarkMode);
+                }
+                
+                // Langue
+                const languageSelect = document.getElementById('language-select');
+                if (languageSelect) {
+                    languageSelect.addEventListener('change', function() {
+                        // Ici, vous implémenteriez le changement de langue
+                        showAlert(`Langue changée en ${this.value}`, 'info');
+                    });
+                }
+                
+                // Modal connexion
+                const loginBtn = document.getElementById('login-btn');
+                if (loginBtn) {
+                    loginBtn.addEventListener('click', () => openModal('login-modal'));
+                }
+                
+                // Modal inscription
+                const signupBtn = document.getElementById('signup-btn');
+                if (signupBtn) {
+                    signupBtn.addEventListener('click', () => openModal('signup-modal'));
+                }
+                
+                // Basculer entre modals
+                document.getElementById('switch-to-signup')?.addEventListener('click', () => {
+                    closeModal('login-modal');
+                    openModal('signup-modal');
                 });
-            });
-        }
-
-        // Fonctions modals
-        function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.add('active');
+                
+                document.getElementById('switch-to-login')?.addEventListener('click', () => {
+                    closeModal('signup-modal');
+                    openModal('login-modal');
+                });
+                
+                // Fermer modals
+                document.querySelectorAll('.close-modal').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const modal = this.closest('.modal');
+                        if (modal) {
+                            closeModal(modal.id);
+                        }
+                    });
+                });
+                
+                // Formulaire de connexion
+                const loginForm = document.getElementById('login-form');
+                if (loginForm) {
+                    loginForm.addEventListener('submit', async function(e) {
+                        e.preventDefault();
+                        
+                        const email = document.getElementById('login-email').value;
+                        const password = document.getElementById('login-password').value;
+                        
+                        try {
+                            const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ email, password })
+                            });
+                            
+                            const data = await response.json();
+                            
+                            if (data.success) {
+                                localStorage.setItem('es-parfumerie-token', data.token);
+                                localStorage.setItem('es-parfumerie-user', JSON.stringify(data.user));
+                                currentUser = data.user;
+                                updateAuthButtons();
+                                closeModal('login-modal');
+                                showAlert('Connexion réussie !', 'success');
+                                location.reload();
+                            } else {
+                                showAlert(data.error || 'Échec de la connexion', 'error');
+                            }
+                        } catch (error) {
+                            console.error('❌ Erreur:', error);
+                            showAlert('Erreur de connexion au serveur', 'error');
+                        }
+                    });
+                }
+                
+                // Formulaire d'inscription
+                const signupForm = document.getElementById('signup-form');
+                if (signupForm) {
+                    signupForm.addEventListener('submit', async function(e) {
+                        e.preventDefault();
+                        
+                        const firstName = document.getElementById('signup-firstname').value;
+                        const lastName = document.getElementById('signup-lastname').value;
+                        const email = document.getElementById('signup-email').value;
+                        const password = document.getElementById('signup-password').value;
+                        const confirmPassword = document.getElementById('signup-confirm').value;
+                        
+                        if (password !== confirmPassword) {
+                            showAlert('Les mots de passe ne correspondent pas', 'error');
+                            return;
+                        }
+                        
+                        if (password.length < 6) {
+                            showAlert('Le mot de passe doit contenir au moins 6 caractères', 'error');
+                            return;
+                        }
+                        
+                        try {
+                            const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ email, password, firstName, lastName })
+                            });
+                            
+                            const data = await response.json();
+                            
+                            if (data.success) {
+                                localStorage.setItem('es-parfumerie-token', data.token);
+                                localStorage.setItem('es-parfumerie-user', JSON.stringify(data.user));
+                                currentUser = data.user;
+                                updateAuthButtons();
+                                closeModal('signup-modal');
+                                showAlert('Compte créé avec succès !', 'success');
+                                location.reload();
+                            } else {
+                                showAlert(data.error || 'Échec de la création du compte', 'error');
+                            }
+                        } catch (error) {
+                            console.error('❌ Erreur:', error);
+                            showAlert('Erreur de connexion au serveur', 'error');
+                        }
+                    });
+                }
             }
-        }
-        
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.remove('active');
+            
+            // Mode sombre
+            function toggleDarkMode() {
+                document.body.classList.toggle('dark-mode');
+                const icon = document.querySelector('#theme-toggle i');
+                if (icon) {
+                    icon.className = document.body.classList.contains('dark-mode') 
+                        ? 'fas fa-sun' 
+                        : 'fas fa-moon';
+                }
+                localStorage.setItem('es-parfumerie-darkmode', document.body.classList.contains('dark-mode'));
             }
-        }
-        
-        // Mode sombre
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-            const icon = document.querySelector('#theme-toggle i');
-            if (icon) {
-                icon.className = document.body.classList.contains('dark-mode') 
-                    ? 'fas fa-sun' 
-                    : 'fas fa-moon';
+            
+            // Fonctions modals
+            function openModal(modalId) {
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.classList.add('active');
+                }
             }
-        }
-    </script>
-</body>
-</html>
+            
+            function closeModal(modalId) {
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.classList.remove('active');
+                }
+            }
+            
+            // Vérifier le mode sombre au chargement
+            const darkMode = localStorage.getItem('es-parfumerie-darkmode') === 'true';
+            if (darkMode) {
+                document.body.classList.add('dark-mode');
+                const icon = document.querySelector('#theme-toggle i');
+                if (icon) {
+                    icon.className = 'fas fa-sun';
+                }
+            }
+        </script>
+    </body>
+    </html>
