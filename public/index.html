@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES Parfumerie - Parfums de Luxe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+    <!-- Header avec navigation -->
+    <header class="header">
+        <div class="container">
+            <!-- Logo et menu mobile -->
+            <div class="header-top">
+                <button class="menu-toggle" aria-label="Menu mobile">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <a href="index.html" class="logo">
+                    <span class="logo-text">ES</span>
+                    <span class="logo-sub">PARFUMERIE</span>
+                </a>
+                
+                <div class="header-actions">
+                    <!-- Changement de langue -->
+                    <div class="language-selector">
+                        <button class="language-btn" id="languageBtn">
+                            <i class="fas fa-globe"></i>
+                            <span class="current-lang">FR</span>
+                        </button>
+                        <div class="language-dropdown">
+                            <a href="#" data-lang="fr">Français (FR)</a>
+                            <a href="#" data-lang="en">English (EN)</a>
+                            <a href="#" data-lang="es">Español (ES)</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Dark mode toggle -->
+                    <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Mode sombre">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    
+                    <!-- Compte utilisateur -->
+                    <div class="user-actions">
+                        <a href="#login-modal" class="user-btn" id="userBtn">
+                            <i class="fas fa-user"></i>
+                        </a>
+                        <div class="user-dropdown">
+                            <a href="profile.html" class="user-link">
+                                <i class="fas fa-user-circle"></i>
+                                <span>Mon profil</span>
+                            </a>
+                            <a href="settings.html" class="user-link">
+                                <i class="fas fa-cog"></i>
+                                <span>Paramètres</span>
+                            </a>
+                            <a href="#" class="user-link" id="logoutBtn">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Déconnexion</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Panier -->
+                    <a href="cart.html" class="cart-btn">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Navigation principale -->
+            <nav class="navbar">
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link active">Accueil</a></li>
+                    <li><a href="about.html" class="nav-link">À propos</a></li>
+                    <li class="dropdown">
+                        <a href="products.html" class="nav-link">Produits <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="products.html?category=femme">Parfums Femme</a>
+                            <a href="products.html?category=homme">Parfums Homme</a>
+                            <a href="products.html?category=unisex">Parfums Unisex</a>
+                            <a href="products.html?category=niche">Parfums Niche</a>
+                        </div>
+                    </li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                
+                <!-- Barre de recherche -->
+                <div class="search-container">
+                    <form class="search-form" id="searchForm">
+                        <input type="text" placeholder="Rechercher un parfum..." class="search-input" id="searchInput">
+                        <button type="submit" class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenu principal -->
+    <main class="main-content">
+        <!-- Section Hero -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">L'art du parfum</h1>
+                    <p class="hero-subtitle">Découvrez notre collection exclusive de parfums de créateurs et de niche</p>
+                    <a href="products.html" class="btn btn-primary">Explorer la collection</a>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Collection de parfums de luxe">
+                </div>
+            </div>
+        </section>
+
+        <!-- Section catégories -->
+        <section class="categories section">
+            <div class="container">
+                <h2 class="section-title">Nos catégories</h2>
+                <div class="categories-grid">
+                    <a href="products.html?category=femme" class="category-card">
+                        <div class="category-image">
+                            <img src="https://images.unsplash.com/photo-1547887537-6158d64c35b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Parfums femme">
+                        </div>
+                        <h3 class="category-title">Femme</h3>
+                    </a>
+                    
+                    <a href="products.html?category=homme" class="category-card">
+                        <div class="category-image">
+                            <img src="https://images.unsplash.com/photo-1590736969954-61afaa6d5955?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Parfums homme">
+                        </div>
+                        <h3 class="category-title">Homme</h3>
+                    </a>
+                    
+                    <a href="products.html?category=unisex" class="category-card">
+                        <div class="category-image">
+                            <img src="https://images.unsplash.com/photo-1544455802-6d4d4c4feb4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Parfums unisex">
+                        </div>
+                        <h3 class="category-title">Unisex</h3>
+                    </a>
+                    
+                    <a href="products.html?category=niche" class="category-card">
+                        <div class="category-image">
+                            <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Parfums niche">
+                        </div>
+                        <h3 class="category-title">Niche</h3>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section produits vedettes -->
+        <section class="featured-products section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Produits vedettes</h2>
+                    <a href="products.html" class="view-all">Voir tout <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="products-grid" id="featuredProducts">
+                    <!-- Les produits seront chargés dynamiquement via JavaScript -->
+                    <div class="loading-spinner">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Chargement des produits...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section à propos -->
+        <section class="about-preview section">
+            <div class="container">
+                <div class="about-content">
+                    <h2 class="section-title">À propos de ES Parfumerie</h2>
+                    <p>Depuis 2010, ES Parfumerie sélectionne les plus belles fragrances pour offrir à ses clients une expérience olfactive unique. Notre expertise nous permet de dénicher des parfums rares et de créateurs.</p>
+                    <p>Nous croyons que chaque individu mérite un parfum qui reflète sa personnalité. C'est pourquoi notre équipe de parfumeurs expérimentés est là pour vous guider dans votre recherche de la fragrance parfaite.</p>
+                    <a href="about.html" class="btn btn-secondary">En savoir plus</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1590737241347-eb70e7b8ea38?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Boutique ES Parfumerie">
+                </div>
+            </div>
+        </section>
+
+        <!-- Section contact rapide -->
+        <section class="contact-preview section">
+            <div class="container">
+                <div class="contact-content">
+                    <h2 class="section-title">Besoin d'aide pour choisir ?</h2>
+                    <p>Notre équipe d'experts est disponible pour vous conseiller dans le choix de votre prochain parfum. N'hésitez pas à nous contacter pour des conseils personnalisés.</p>
+                    <a href="contact.html" class="btn btn-primary">Nous contacter</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3 class="footer-title">ES Parfumerie</h3>
+                    <p>Votre destination pour les parfums de luxe et de créateurs depuis 2010.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-title">Liens rapides</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="products.html">Produits</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-title">Catégories</h3>
+                    <ul class="footer-links">
+                        <li><a href="products.html?category=femme">Parfums Femme</a></li>
+                        <li><a href="products.html?category=homme">Parfums Homme</a></li>
+                        <li><a href="products.html?category=unisex">Parfums Unisex</a></li>
+                        <li><a href="products.html?category=niche">Parfums Niche</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-title">Contact</h3>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Avenue des Champs-Élysées, 75008 Paris</li>
+                        <li><i class="fas fa-phone"></i> +33 1 23 45 67 89</li>
+                        <li><i class="fas fa-envelope"></i> contact@es-parfumerie.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 ES Parfumerie. Tous droits réservés.</p>
+                <div class="footer-bottom-links">
+                    <a href="privacy.html">Politique de confidentialité</a>
+                    <a href="terms.html">Conditions d'utilisation</a>
+                    <a href="cookies.html">Gestion des cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal connexion/inscription -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-tabs">
+                <button class="tab-btn active" data-tab="login">Connexion</button>
+                <button class="tab-btn" data-tab="register">Inscription</button>
+            </div>
+            
+            <div class="tab-content active" id="login-tab">
+                <h3>Connectez-vous à votre compte</h3>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Mot de passe</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
+                </form>
+                <p class="modal-text">Pas encore de compte ? <a href="#" class="switch-tab" data-tab="register">Inscrivez-vous</a></p>
+            </div>
+            
+            <div class="tab-content" id="register-tab">
+                <h3>Créez votre compte</h3>
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="register-name">Nom complet</label>
+                        <input type="text" id="register-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email</label>
+                        <input type="email" id="register-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Mot de passe</label>
+                        <input type="password" id="register-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-confirm">Confirmer le mot de passe</label>
+                        <input type="password" id="register-confirm" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">S'inscrire</button>
+                </form>
+                <p class="modal-text">Déjà un compte ? <a href="#" class="switch-tab" data-tab="login">Connectez-vous</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/language.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
