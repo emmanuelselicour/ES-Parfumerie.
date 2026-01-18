@@ -26,7 +26,7 @@
                         <li><a href="#about" data-i18n="nav.about">À propos</a></li>
                         <li><a href="#products" data-i18n="nav.products">Produits</a></li>
                         <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
-                        <li><a href="#profile" data-i18n="nav.profile">Profil</a></li>
+                        <li><a href="cart.html" data-i18n="nav.cart">Panier</a></li>
                     </ul>
                 </div>
                 
@@ -49,7 +49,7 @@
                     </div>
                     
                     <div class="cart-icon">
-                        <a href="#cart" aria-label="Panier">
+                        <a href="cart.html" aria-label="Panier">
                             <i class="fas fa-shopping-bag"></i>
                             <span class="cart-count">0</span>
                         </a>
@@ -76,8 +76,8 @@
             <li><a href="#about" data-i18n="nav.about">À propos</a></li>
             <li><a href="#products" data-i18n="nav.products">Produits</a></li>
             <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+            <li><a href="cart.html" data-i18n="nav.cart">Panier</a></li>
             <li><a href="#profile" data-i18n="nav.profile">Profil</a></li>
-            <li><a href="#settings" data-i18n="nav.settings">Paramètres</a></li>
         </ul>
         <div class="mobile-menu-footer">
             <div class="auth-buttons-mobile">
@@ -144,8 +144,24 @@
         <!-- Section Produits -->
         <section id="products" class="products">
             <div class="container">
-                <h2 class="section-title" data-i18n="products.title">Nos Parfums</h2>
-                <p class="section-subtitle" data-i18n="products.subtitle">Découvrez notre collection exclusive. Actuellement, aucun produit n'est disponible.</p>
+                <div class="products-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <div>
+                        <h2 class="section-title" data-i18n="products.title">Nos Parfums</h2>
+                        <p class="section-subtitle" data-i18n="products.subtitle">Découvrez notre collection exclusive</p>
+                    </div>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <button id="refresh-products" class="btn-outline" style="display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-sync-alt"></i>
+                            <span>Actualiser</span>
+                        </button>
+                        <div id="admin-actions" style="display: none;">
+                            <a href="admin.html" class="btn-primary" style="display: flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-cog"></i>
+                                <span>Admin</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
                 
                 <div class="products-filter">
                     <button class="filter-btn active" data-filter="all" data-i18n="products.all">Tous</button>
@@ -158,17 +174,14 @@
                     <!-- Les produits seront chargés dynamiquement depuis l'API -->
                     <div class="no-products">
                         <i class="fas fa-box-open"></i>
-                        <h3 data-i18n="products.empty">Aucun produit disponible</h3>
-                        <p data-i18n="products.emptyDesc">Notre collection sera bientôt disponible. Revenez plus tard !</p>
+                        <h3 data-i18n="products.empty">Chargement des produits...</h3>
+                        <p data-i18n="products.emptyDesc">Chargement en cours, veuillez patienter.</p>
                     </div>
                 </div>
                 
-                <!-- Admin seulement - Bouton pour ajouter des produits -->
-                <div class="admin-actions" id="admin-actions" style="display: none;">
-                    <button id="add-product-btn" class="btn-primary">
-                        <i class="fas fa-plus"></i> 
-                        <span data-i18n="products.add">Ajouter un produit</span>
-                    </button>
+                <div class="products-loading" id="products-loading" style="text-align: center; padding: 20px; display: none;">
+                    <i class="fas fa-spinner fa-spin fa-2x"></i>
+                    <p>Chargement des produits...</p>
                 </div>
             </div>
         </section>
@@ -228,133 +241,6 @@
                             </div>
                             <button type="submit" class="btn-primary" data-i18n="contact.send">Envoyer le message</button>
                         </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section Profil -->
-        <section id="profile" class="profile" style="display: none;">
-            <div class="container">
-                <h2 class="section-title" data-i18n="profile.title">Mon Profil</h2>
-                <div class="profile-content">
-                    <div class="profile-sidebar">
-                        <div class="profile-info">
-                            <div class="profile-avatar">
-                                <i class="fas fa-user-circle"></i>
-                            </div>
-                            <h3 id="profile-name">Invité</h3>
-                            <p id="profile-email">Non connecté</p>
-                        </div>
-                        <nav class="profile-nav">
-                            <ul>
-                                <li><a href="#profile-info" class="profile-nav-link active" data-i18n="profile.info">Informations</a></li>
-                                <li><a href="#profile-orders" class="profile-nav-link" data-i18n="profile.orders">Commandes</a></li>
-                                <li><a href="#profile-wishlist" class="profile-nav-link" data-i18n="profile.wishlist">Liste de souhaits</a></li>
-                                <li><a href="#profile-addresses" class="profile-nav-link" data-i18n="profile.addresses">Adresses</a></li>
-                                <li><a href="#settings" class="profile-nav-link" data-i18n="profile.settings">Paramètres</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="profile-main">
-                        <!-- Informations utilisateur -->
-                        <div id="profile-info" class="profile-section active">
-                            <h3 data-i18n="profile.info">Informations personnelles</h3>
-                            <form id="profile-form">
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <input type="text" id="first-name" placeholder=" " disabled>
-                                        <label for="first-name" data-i18n="profile.firstName">Prénom</label>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" id="last-name" placeholder=" " disabled>
-                                        <label for="last-name" data-i18n="profile.lastName">Nom</label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" id="user-email" placeholder=" " disabled>
-                                    <label for="user-email" data-i18n="profile.email">Email</label>
-                                </div>
-                                <div class="form-group">
-                                    <input type="tel" id="user-phone" placeholder=" " disabled>
-                                    <label for="user-phone" data-i18n="profile.phone">Téléphone</label>
-                                </div>
-                                <button type="button" id="edit-profile-btn" class="btn-outline" data-i18n="profile.edit">Modifier le profil</button>
-                                <button type="submit" id="save-profile-btn" class="btn-primary" style="display: none;" data-i18n="profile.save">Enregistrer</button>
-                            </form>
-                        </div>
-                        
-                        <!-- Commandes -->
-                        <div id="profile-orders" class="profile-section">
-                            <h3 data-i18n="profile.orders">Mes commandes</h3>
-                            <div class="no-orders">
-                                <i class="fas fa-shopping-bag"></i>
-                                <p data-i18n="profile.noOrders">Vous n'avez pas encore passé de commande</p>
-                                <a href="#products" class="btn-primary" data-i18n="profile.shopNow">Acheter maintenant</a>
-                            </div>
-                        </div>
-                        
-                        <!-- Liste de souhaits -->
-                        <div id="profile-wishlist" class="profile-section">
-                            <h3 data-i18n="profile.wishlist">Ma liste de souhaits</h3>
-                            <div class="no-wishlist">
-                                <i class="fas fa-heart"></i>
-                                <p data-i18n="profile.noWishlist">Votre liste de souhaits est vide</p>
-                                <a href="#products" class="btn-primary" data-i18n="profile.browse">Parcourir les produits</a>
-                            </div>
-                        </div>
-                        
-                        <!-- Adresses -->
-                        <div id="profile-addresses" class="profile-section">
-                            <h3 data-i18n="profile.addresses">Mes adresses</h3>
-                            <div class="no-addresses">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <p data-i18n="profile.noAddresses">Aucune adresse enregistrée</p>
-                                <button id="add-address-btn" class="btn-primary" data-i18n="profile.addAddress">Ajouter une adresse</button>
-                            </div>
-                        </div>
-                        
-                        <!-- Paramètres -->
-                        <div id="settings" class="profile-section">
-                            <h3 data-i18n="settings.title">Paramètres</h3>
-                            <div class="settings-options">
-                                <div class="setting-item">
-                                    <div class="setting-info">
-                                        <h4 data-i18n="settings.notifications">Notifications</h4>
-                                        <p data-i18n="settings.notificationsDesc">Recevoir des emails promotionnels et des mises à jour</p>
-                                    </div>
-                                    <label class="switch">
-                                        <input type="checkbox" id="notification-toggle" checked>
-                                        <span class="slider"></span>
-                                    </label>
-                                </div>
-                                <div class="setting-item">
-                                    <div class="setting-info">
-                                        <h4 data-i18n="settings.darkMode">Mode sombre</h4>
-                                        <p data-i18n="settings.darkModeDesc">Activer/désactiver le thème sombre</p>
-                                    </div>
-                                    <label class="switch">
-                                        <input type="checkbox" id="dark-mode-toggle">
-                                        <span class="slider"></span>
-                                    </label>
-                                </div>
-                                <div class="setting-item">
-                                    <div class="setting-info">
-                                        <h4 data-i18n="settings.language">Langue</h4>
-                                        <p data-i18n="settings.languageDesc">Changer la langue du site</p>
-                                    </div>
-                                    <select id="profile-language-select">
-                                        <option value="fr" selected>Français</option>
-                                        <option value="en">English</option>
-                                        <option value="es">Español</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="settings-danger">
-                                <h4 data-i18n="settings.danger">Zone dangereuse</h4>
-                                <button id="delete-account-btn" class="btn-danger" data-i18n="settings.deleteAccount">Supprimer mon compte</button>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -497,55 +383,6 @@
                     <p data-i18n="signup.haveAccount">Vous avez déjà un compte?</p>
                     <button id="switch-to-login" class="btn-text" data-i18n="signup.login">Se connecter</button>
                 </div>
-            </div>
-        </div>
-    </modal>
-
-    <!-- Modal Ajouter Produit (Admin) -->
-    <div class="modal" id="add-product-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 data-i18n="product.addTitle">Ajouter un nouveau produit</h2>
-                <button class="close-modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="add-product-form">
-                    <div class="form-group">
-                        <input type="text" id="product-name" placeholder=" " required>
-                        <label for="product-name" data-i18n="product.name">Nom du produit</label>
-                    </div>
-                    <div class="form-group">
-                        <textarea id="product-description" placeholder=" " rows="3" required></textarea>
-                        <label for="product-description" data-i18n="product.description">Description</label>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <input type="number" id="product-price" placeholder=" " step="0.01" min="0" required>
-                            <label for="product-price" data-i18n="product.price">Prix (€)</label>
-                        </div>
-                        <div class="form-group">
-                            <input type="number" id="product-stock" placeholder=" " min="0" required>
-                            <label for="product-stock" data-i18n="product.stock">Stock</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <select id="product-category" required>
-                            <option value="" disabled selected data-i18n="product.selectCategory">Sélectionner une catégorie</option>
-                            <option value="men" data-i18n="products.men">Homme</option>
-                            <option value="women" data-i18n="products.women">Femme</option>
-                            <option value="unisex" data-i18n="products.unisex">Unisex</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="product-image" data-i18n="product.image">Image URL</label>
-                        <input type="text" id="product-image" placeholder="https://exemple.com/image.jpg" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="product-features" data-i18n="product.features">Caractéristiques (une par ligne)</label>
-                        <textarea id="product-features" placeholder=" " rows="3"></textarea>
-                    </div>
-                    <button type="submit" class="btn-primary" data-i18n="product.add">Ajouter le produit</button>
-                </form>
             </div>
         </div>
     </div>
