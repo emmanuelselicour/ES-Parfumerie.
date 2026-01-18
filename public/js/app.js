@@ -10,7 +10,8 @@ const AppState = {
     cart: [],
     language: 'fr',
     darkMode: false,
-    currentSection: 'home'
+    currentSection: 'home',
+    isLoading: false
 };
 
 // Dictionnaires de traduction
@@ -22,7 +23,7 @@ const translations = {
         'nav.products': 'Produits',
         'nav.contact': 'Contact',
         'nav.profile': 'Profil',
-        'nav.settings': 'Paramètres',
+        'nav.cart': 'Panier',
         'nav.login': 'Connexion',
         'nav.signup': 'Inscription',
         
@@ -45,7 +46,7 @@ const translations = {
         
         // Products
         'products.title': 'Nos Parfums',
-        'products.subtitle': 'Découvrez notre collection exclusive. Actuellement, aucun produit n\'est disponible.',
+        'products.subtitle': 'Découvrez notre collection exclusive',
         'products.all': 'Tous',
         'products.men': 'Homme',
         'products.women': 'Femme',
@@ -70,37 +71,6 @@ const translations = {
         'contact.formMessage': 'Votre message',
         'contact.send': 'Envoyer le message',
         
-        // Profile
-        'profile.title': 'Mon Profil',
-        'profile.info': 'Informations',
-        'profile.orders': 'Commandes',
-        'profile.wishlist': 'Liste de souhaits',
-        'profile.addresses': 'Adresses',
-        'profile.settings': 'Paramètres',
-        'profile.firstName': 'Prénom',
-        'profile.lastName': 'Nom',
-        'profile.email': 'Email',
-        'profile.phone': 'Téléphone',
-        'profile.edit': 'Modifier le profil',
-        'profile.save': 'Enregistrer',
-        'profile.noOrders': 'Vous n\'avez pas encore passé de commande',
-        'profile.shopNow': 'Acheter maintenant',
-        'profile.noWishlist': 'Votre liste de souhaits est vide',
-        'profile.browse': 'Parcourir les produits',
-        'profile.noAddresses': 'Aucune adresse enregistrée',
-        'profile.addAddress': 'Ajouter une adresse',
-        
-        // Settings
-        'settings.title': 'Paramètres',
-        'settings.notifications': 'Notifications',
-        'settings.notificationsDesc': 'Recevoir des emails promotionnels et des mises à jour',
-        'settings.darkMode': 'Mode sombre',
-        'settings.darkModeDesc': 'Activer/désactiver le thème sombre',
-        'settings.language': 'Langue',
-        'settings.languageDesc': 'Changer la langue du site',
-        'settings.danger': 'Zone dangereuse',
-        'settings.deleteAccount': 'Supprimer mon compte',
-        
         // Login
         'login.title': 'Connexion',
         'login.email': 'Adresse email',
@@ -123,17 +93,6 @@ const translations = {
         'signup.haveAccount': 'Vous avez déjà un compte?',
         'signup.login': 'Se connecter',
         
-        // Product management
-        'product.addTitle': 'Ajouter un nouveau produit',
-        'product.name': 'Nom du produit',
-        'product.description': 'Description',
-        'product.price': 'Prix (€)',
-        'product.stock': 'Stock',
-        'product.selectCategory': 'Sélectionner une catégorie',
-        'product.image': 'Image URL',
-        'product.features': 'Caractéristiques (une par ligne)',
-        'product.add': 'Ajouter le produit',
-        
         // Footer
         'footer.description': 'Votre destination pour des parfums d\'exception depuis 2010.',
         'footer.links': 'Liens rapides',
@@ -155,7 +114,7 @@ const translations = {
         'nav.products': 'Products',
         'nav.contact': 'Contact',
         'nav.profile': 'Profile',
-        'nav.settings': 'Settings',
+        'nav.cart': 'Cart',
         'nav.login': 'Login',
         'nav.signup': 'Sign Up',
         
@@ -178,14 +137,13 @@ const translations = {
         
         // Products
         'products.title': 'Our Perfumes',
-        'products.subtitle': 'Discover our exclusive collection. Currently, no products are available.',
+        'products.subtitle': 'Discover our exclusive collection',
         'products.all': 'All',
         'products.men': 'Men',
         'products.women': 'Women',
         'products.unisex': 'Unisex',
         'products.empty': 'No products available',
         'products.emptyDesc': 'Our collection will be available soon. Come back later!',
-        'products.add': 'Add a product',
         'products.addToCart': 'Add to cart',
         'products.viewDetails': 'View details',
         'products.outOfStock': 'Out of stock',
@@ -202,37 +160,6 @@ const translations = {
         'contact.formSubject': 'Subject (optional)',
         'contact.formMessage': 'Your message',
         'contact.send': 'Send message',
-        
-        // Profile
-        'profile.title': 'My Profile',
-        'profile.info': 'Information',
-        'profile.orders': 'Orders',
-        'profile.wishlist': 'Wishlist',
-        'profile.addresses': 'Addresses',
-        'profile.settings': 'Settings',
-        'profile.firstName': 'First name',
-        'profile.lastName': 'Last name',
-        'profile.email': 'Email',
-        'profile.phone': 'Phone',
-        'profile.edit': 'Edit profile',
-        'profile.save': 'Save',
-        'profile.noOrders': 'You haven\'t placed any orders yet',
-        'profile.shopNow': 'Shop now',
-        'profile.noWishlist': 'Your wishlist is empty',
-        'profile.browse': 'Browse products',
-        'profile.noAddresses': 'No addresses saved',
-        'profile.addAddress': 'Add an address',
-        
-        // Settings
-        'settings.title': 'Settings',
-        'settings.notifications': 'Notifications',
-        'settings.notificationsDesc': 'Receive promotional emails and updates',
-        'settings.darkMode': 'Dark mode',
-        'settings.darkModeDesc': 'Enable/disable dark theme',
-        'settings.language': 'Language',
-        'settings.languageDesc': 'Change website language',
-        'settings.danger': 'Danger zone',
-        'settings.deleteAccount': 'Delete my account',
         
         // Login
         'login.title': 'Login',
@@ -256,17 +183,6 @@ const translations = {
         'signup.haveAccount': 'Already have an account?',
         'signup.login': 'Login',
         
-        // Product management
-        'product.addTitle': 'Add a new product',
-        'product.name': 'Product name',
-        'product.description': 'Description',
-        'product.price': 'Price (€)',
-        'product.stock': 'Stock',
-        'product.selectCategory': 'Select a category',
-        'product.image': 'Image URL',
-        'product.features': 'Features (one per line)',
-        'product.add': 'Add product',
-        
         // Footer
         'footer.description': 'Your destination for exceptional perfumes since 2010.',
         'footer.links': 'Quick Links',
@@ -288,7 +204,7 @@ const translations = {
         'nav.products': 'Productos',
         'nav.contact': 'Contacto',
         'nav.profile': 'Perfil',
-        'nav.settings': 'Configuración',
+        'nav.cart': 'Carrito',
         'nav.login': 'Iniciar sesión',
         'nav.signup': 'Registrarse',
         
@@ -311,14 +227,13 @@ const translations = {
         
         // Products
         'products.title': 'Nuestros Perfumes',
-        'products.subtitle': 'Descubra nuestra exclusiva colección. Actualmente, no hay productos disponibles.',
+        'products.subtitle': 'Descubra nuestra exclusiva colección',
         'products.all': 'Todos',
         'products.men': 'Hombre',
         'products.women': 'Mujer',
         'products.unisex': 'Unisex',
         'products.empty': 'No hay productos disponibles',
         'products.emptyDesc': 'Nuestra colección estará disponible pronto. ¡Vuelva más tarde!',
-        'products.add': 'Añadir producto',
         'products.addToCart': 'Añadir al carrito',
         'products.viewDetails': 'Ver detalles',
         'products.outOfStock': 'Agotado',
@@ -335,37 +250,6 @@ const translations = {
         'contact.formSubject': 'Asunto (opcional)',
         'contact.formMessage': 'Su mensaje',
         'contact.send': 'Enviar mensaje',
-        
-        // Profile
-        'profile.title': 'Mi Perfil',
-        'profile.info': 'Información',
-        'profile.orders': 'Pedidos',
-        'profile.wishlist': 'Lista de deseos',
-        'profile.addresses': 'Direcciones',
-        'profile.settings': 'Configuración',
-        'profile.firstName': 'Nombre',
-        'profile.lastName': 'Apellido',
-        'profile.email': 'Correo electrónico',
-        'profile.phone': 'Teléfono',
-        'profile.edit': 'Editar perfil',
-        'profile.save': 'Guardar',
-        'profile.noOrders': 'Aún no ha realizado ningún pedido',
-        'profile.shopNow': 'Comprar ahora',
-        'profile.noWishlist': 'Su lista de deseos está vacía',
-        'profile.browse': 'Explorar productos',
-        'profile.noAddresses': 'No hay direcciones guardadas',
-        'profile.addAddress': 'Añadir dirección',
-        
-        // Settings
-        'settings.title': 'Configuración',
-        'settings.notifications': 'Notificaciones',
-        'settings.notificationsDesc': 'Recibir correos promocionales y actualizaciones',
-        'settings.darkMode': 'Modo oscuro',
-        'settings.darkModeDesc': 'Activar/desactivar tema oscuro',
-        'settings.language': 'Idioma',
-        'settings.languageDesc': 'Cambiar idioma del sitio',
-        'settings.danger': 'Zona peligrosa',
-        'settings.deleteAccount': 'Eliminar mi cuenta',
         
         // Login
         'login.title': 'Iniciar sesión',
@@ -388,17 +272,6 @@ const translations = {
         'signup.submit': 'Crear mi cuenta',
         'signup.haveAccount': '¿Ya tiene una cuenta?',
         'signup.login': 'Iniciar sesión',
-        
-        // Product management
-        'product.addTitle': 'Añadir un nuevo producto',
-        'product.name': 'Nombre del producto',
-        'product.description': 'Descripción',
-        'product.price': 'Precio (€)',
-        'product.stock': 'Stock',
-        'product.selectCategory': 'Seleccionar una categoría',
-        'product.image': 'URL de la imagen',
-        'product.features': 'Características (una por línea)',
-        'product.add': 'Añadir producto',
         
         // Footer
         'footer.description': 'Su destino para perfumes excepcionales desde 2010.',
@@ -437,9 +310,7 @@ function changeLanguage(lang) {
     
     // Mettre à jour le sélecteur de langue
     const languageSelect = document.getElementById('language-select');
-    const profileLanguageSelect = document.getElementById('profile-language-select');
     if (languageSelect) languageSelect.value = lang;
-    if (profileLanguageSelect) profileLanguageSelect.value = lang;
     
     // Sauvegarder la préférence
     localStorage.setItem('es-parfumerie-language', lang);
@@ -459,64 +330,87 @@ function toggleDarkMode() {
         }
     }
     
-    // Mettre à jour le toggle dans les paramètres
-    const darkModeToggle = document.getElementById('dark-mode-toggle');
-    if (darkModeToggle) {
-        darkModeToggle.checked = AppState.darkMode;
-    }
-    
     // Sauvegarder la préférence
     localStorage.setItem('es-parfumerie-darkmode', AppState.darkMode);
 }
 
-// Fonction pour afficher/masquer la section profil
-function toggleProfileSection(sectionId) {
-    // Masquer toutes les sections
-    document.querySelectorAll('.profile-section').forEach(section => {
-        section.classList.remove('active');
-    });
-    
-    // Désactiver tous les liens
-    document.querySelectorAll('.profile-nav-link').forEach(link => {
-        link.classList.remove('active');
-    });
-    
-    // Afficher la section sélectionnée
-    const section = document.getElementById(sectionId);
-    if (section) {
-        section.classList.add('active');
-    }
-    
-    // Activer le lien correspondant
-    const link = document.querySelector(`[href="#${sectionId}"]`);
-    if (link) {
-        link.classList.add('active');
-    }
-}
-
 // Fonction pour charger les produits depuis l'API
 async function loadProducts() {
+    if (AppState.isLoading) return;
+    
+    AppState.isLoading = true;
+    const loadingEl = document.getElementById('products-loading');
+    const productsGrid = document.getElementById('products-grid');
+    
     try {
-        const response = await fetch(`${API_BASE_URL}/api/products`);
+        console.log('🔄 Chargement des produits depuis l\'API...');
+        
+        if (loadingEl) loadingEl.style.display = 'block';
+        if (productsGrid) {
+            productsGrid.innerHTML = `
+                <div class="no-products">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <h3>Chargement des produits...</h3>
+                    <p>Veuillez patienter</p>
+                </div>
+            `;
+        }
+        
+        // Ajouter un timestamp pour éviter le cache
+        const timestamp = new Date().getTime();
+        const response = await fetch(`${API_BASE_URL}/api/products?t=${timestamp}`);
         
         if (response.ok) {
             const data = await response.json();
             AppState.products = data.products || [];
+            console.log(`✅ ${AppState.products.length} produits chargés`);
+            
             displayProducts();
             
             // Afficher le bouton admin si l'utilisateur est admin
-            if (AppState.currentUser && AppState.currentUser.role === 'admin') {
-                document.getElementById('admin-actions').style.display = 'block';
+            const adminActions = document.getElementById('admin-actions');
+            if (adminActions && AppState.currentUser && AppState.currentUser.role === 'admin') {
+                adminActions.style.display = 'block';
             }
+            
+            showNotification(`✅ ${AppState.products.length} produits chargés`, 'success');
+            
         } else {
-            console.error('Erreur lors du chargement des produits');
+            console.error('❌ Erreur API:', response.status, response.statusText);
             AppState.products = [];
-            displayProducts();
+            
+            if (productsGrid) {
+                productsGrid.innerHTML = `
+                    <div class="no-products">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Erreur de connexion au serveur</h3>
+                        <p>Impossible de charger les produits. Veuillez réessayer plus tard.</p>
+                        <button onclick="loadProducts()" class="btn-primary">
+                            <i class="fas fa-sync-alt"></i> Réessayer
+                        </button>
+                    </div>
+                `;
+            }
         }
     } catch (error) {
-        console.error('Erreur réseau:', error);
+        console.error('❌ Erreur réseau:', error);
         AppState.products = [];
-        displayProducts();
+        
+        if (productsGrid) {
+            productsGrid.innerHTML = `
+                <div class="no-products">
+                    <i class="fas fa-wifi-slash"></i>
+                    <h3>Problème de connexion</h3>
+                    <p>Impossible de se connecter au serveur. Vérifiez votre connexion internet.</p>
+                    <button onclick="loadProducts()" class="btn-primary">
+                        <i class="fas fa-sync-alt"></i> Réessayer
+                    </button>
+                </div>
+            `;
+        }
+    } finally {
+        AppState.isLoading = false;
+        if (loadingEl) loadingEl.style.display = 'none';
     }
 }
 
@@ -539,8 +433,16 @@ function displayProducts(filter = 'all') {
                 <i class="fas fa-box-open"></i>
                 <h3 data-i18n="products.empty">Aucun produit disponible</h3>
                 <p data-i18n="products.emptyDesc">Notre collection sera bientôt disponible. Revenez plus tard !</p>
+                ${AppState.products.length === 0 ? `
+                    <button onclick="loadProducts()" class="btn-primary">
+                        <i class="fas fa-sync-alt"></i> Actualiser
+                    </button>
+                ` : ''}
             </div>
         `;
+        
+        // Réappliquer les traductions
+        changeLanguage(AppState.language);
         return;
     }
     
@@ -548,13 +450,22 @@ function displayProducts(filter = 'all') {
     productsGrid.innerHTML = filteredProducts.map(product => `
         <div class="product-card" data-category="${product.category}">
             <div class="product-image">
-                <img src="${product.image || 'https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'}" alt="${product.name}">
+                <img src="${product.image_url || product.image || 'https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'}" 
+                     alt="${product.name}"
+                     onerror="this.src='https://via.placeholder.com/400x300?text=ES+Parfumerie'">
             </div>
             <div class="product-info">
-                <span class="product-category">${product.category === 'men' ? 'Homme' : product.category === 'women' ? 'Femme' : 'Unisex'}</span>
+                <span class="product-category">
+                    ${product.category === 'men' ? 'Homme' : 
+                      product.category === 'women' ? 'Femme' : 'Unisex'}
+                </span>
                 <h3>${product.name}</h3>
-                <p>${product.description.substring(0, 100)}...</p>
-                <div class="product-price">${product.price.toFixed(2)} €</div>
+                <p>${(product.description || '').substring(0, 100)}${product.description && product.description.length > 100 ? '...' : ''}</p>
+                <div class="product-price">${parseFloat(product.price).toFixed(2)} €</div>
+                <div class="product-stock" style="font-size: 0.9rem; color: ${product.stock > 10 ? '#2ecc71' : product.stock > 0 ? '#f39c12' : '#e74c3c'}; margin: 5px 0;">
+                    ${product.stock > 10 ? '🟢 En stock' : 
+                     product.stock > 0 ? '🟡 Stock limité' : '🔴 Rupture de stock'}
+                </div>
                 <div class="product-actions">
                     ${product.stock > 0 ? 
                         `<button class="btn-primary add-to-cart" data-id="${product.id}" data-i18n="products.addToCart">Ajouter au panier</button>` : 
@@ -580,20 +491,16 @@ function displayProducts(filter = 'all') {
 
 // Fonction pour ajouter au panier
 function addToCart(productId) {
-    // Vérifier si l'utilisateur est connecté
-    if (!AppState.currentUser) {
-        alert('Vous devez être connecté pour ajouter des articles au panier.');
-        openModal('login-modal');
+    const product = AppState.products.find(p => p.id == productId);
+    
+    if (!product) {
+        showNotification('Produit non trouvé', 'error');
         return;
     }
     
-    const product = AppState.products.find(p => p.id == productId);
-    
-    if (!product) return;
-    
     // Vérifier le stock
     if (product.stock <= 0) {
-        alert('Ce produit est en rupture de stock.');
+        showNotification('Ce produit est en rupture de stock', 'error');
         return;
     }
     
@@ -604,7 +511,7 @@ function addToCart(productId) {
         if (cartItem.quantity < product.stock) {
             cartItem.quantity++;
         } else {
-            alert('Stock insuffisant pour ce produit.');
+            showNotification('Stock insuffisant pour ce produit', 'error');
             return;
         }
     } else {
@@ -621,7 +528,7 @@ function addToCart(productId) {
     saveCartToLocalStorage();
     
     // Afficher une notification
-    showNotification(`${product.name} a été ajouté au panier.`);
+    showNotification(`${product.name} a été ajouté au panier`, 'success');
 }
 
 // Fonction pour mettre à jour le compteur du panier
@@ -654,23 +561,16 @@ function loadCartFromLocalStorage() {
         try {
             const parsedData = JSON.parse(cartData);
             
-            // Vérifier si le panier est toujours valide (moins de 7 jours)
-            const sevenDays = 7 * 24 * 60 * 60 * 1000;
-            if (new Date().getTime() - parsedData.timestamp < sevenDays) {
-                // Reconstruire le panier avec les produits actuels
-                parsedData.items.forEach(item => {
-                    const product = AppState.products.find(p => p.id == item.productId);
-                    if (product) {
-                        AppState.cart.push({
-                            product: product,
-                            quantity: item.quantity
-                        });
-                    }
-                });
-            } else {
-                // Le panier est trop ancien, on le supprime
-                localStorage.removeItem('es-parfumerie-cart');
-            }
+            // Pour chaque élément du panier, trouver le produit correspondant
+            parsedData.items.forEach(item => {
+                const product = AppState.products.find(p => p.id == item.productId);
+                if (product) {
+                    AppState.cart.push({
+                        product: product,
+                        quantity: item.quantity
+                    });
+                }
+            });
         } catch (error) {
             console.error('Erreur lors du chargement du panier:', error);
         }
@@ -727,25 +627,16 @@ function showNotification(message, type = 'success') {
 // Fonction pour gérer la connexion
 async function handleLogin(email, password, rememberMe) {
     try {
-        // Simuler une requête API
-        // Dans une vraie application, vous utiliseriez:
-        // const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify({ email, password })
-        // });
-        
-        // Pour le moment, simulation
         showNotification('Connexion en cours...', 'info');
         
+        // Simulation de succès
         setTimeout(() => {
-            // Simulation de succès
             AppState.currentUser = {
                 id: 1,
                 email: email,
                 firstName: 'Jean',
                 lastName: 'Dupont',
-                role: 'user'
+                role: email === 'admin@esparfumerie.com' ? 'admin' : 'user'
             };
             
             // Mettre à jour l'interface
@@ -772,7 +663,6 @@ async function handleLogin(email, password, rememberMe) {
 // Fonction pour gérer l'inscription
 async function handleSignup(firstName, lastName, email, password) {
     try {
-        // Simuler une requête API
         showNotification('Création du compte en cours...', 'info');
         
         setTimeout(() => {
@@ -807,36 +697,22 @@ async function handleSignup(firstName, lastName, email, password) {
 // Fonction pour mettre à jour l'interface utilisateur
 function updateUserInterface() {
     const authButtons = document.querySelector('.auth-buttons');
-    const profileSection = document.getElementById('profile');
-    const profileName = document.getElementById('profile-name');
-    const profileEmail = document.getElementById('profile-email');
+    const adminActions = document.getElementById('admin-actions');
     
     if (AppState.currentUser) {
         // Masquer les boutons de connexion/inscription
         if (authButtons) authButtons.style.display = 'none';
         
-        // Afficher la section profil
-        if (profileSection) profileSection.style.display = 'block';
-        
-        // Mettre à jour les informations du profil
-        if (profileName) profileName.textContent = `${AppState.currentUser.firstName} ${AppState.currentUser.lastName}`;
-        if (profileEmail) profileEmail.textContent = AppState.currentUser.email;
-        
-        // Remplir le formulaire de profil
-        document.getElementById('first-name').value = AppState.currentUser.firstName;
-        document.getElementById('last-name').value = AppState.currentUser.lastName;
-        document.getElementById('user-email').value = AppState.currentUser.email;
-        
         // Afficher le bouton admin si l'utilisateur est admin
-        if (AppState.currentUser.role === 'admin') {
-            document.getElementById('admin-actions').style.display = 'block';
+        if (adminActions && AppState.currentUser.role === 'admin') {
+            adminActions.style.display = 'block';
         }
     } else {
         // Afficher les boutons de connexion/inscription
         if (authButtons) authButtons.style.display = 'flex';
         
-        // Masquer la section profil
-        if (profileSection) profileSection.style.display = 'none';
+        // Masquer le bouton admin
+        if (adminActions) adminActions.style.display = 'none';
     }
 }
 
@@ -855,41 +731,6 @@ function closeModal(modalId) {
     if (modal) {
         modal.classList.remove('active');
         document.body.style.overflow = 'auto';
-    }
-}
-
-// Fonction pour ajouter un produit (admin)
-async function addProduct(productData) {
-    try {
-        // Simuler une requête API
-        showNotification('Ajout du produit en cours...', 'info');
-        
-        setTimeout(() => {
-            // Simulation de succès
-            const newProduct = {
-                id: AppState.products.length + 1,
-                ...productData,
-                createdAt: new Date().toISOString()
-            };
-            
-            AppState.products.push(newProduct);
-            
-            // Mettre à jour l'affichage
-            displayProducts();
-            
-            // Fermer le modal
-            closeModal('add-product-modal');
-            
-            // Réinitialiser le formulaire
-            document.getElementById('add-product-form').reset();
-            
-            // Afficher une notification
-            showNotification('Produit ajouté avec succès !', 'success');
-        }, 1000);
-        
-    } catch (error) {
-        console.error('Erreur lors de l\'ajout du produit:', error);
-        showNotification('Échec de l\'ajout du produit. Veuillez réessayer.', 'error');
     }
 }
 
@@ -936,8 +777,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Charger les produits
     loadProducts();
     
-    // Charger le panier
-    loadCartFromLocalStorage();
+    // Charger le panier (après le chargement des produits)
+    setTimeout(() => {
+        loadCartFromLocalStorage();
+    }, 1000);
     
     // Navigation mobile
     const menuToggle = document.getElementById('menu-toggle');
@@ -965,31 +808,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Basculer le mode sombre
     const themeToggle = document.getElementById('theme-toggle');
-    const darkModeToggle = document.getElementById('dark-mode-toggle');
-    
     if (themeToggle) {
         themeToggle.addEventListener('click', toggleDarkMode);
     }
     
-    if (darkModeToggle) {
-        darkModeToggle.checked = AppState.darkMode;
-        darkModeToggle.addEventListener('change', toggleDarkMode);
-    }
-    
     // Changer la langue
     const languageSelect = document.getElementById('language-select');
-    const profileLanguageSelect = document.getElementById('profile-language-select');
-    
     if (languageSelect) {
         languageSelect.value = AppState.language;
         languageSelect.addEventListener('change', function() {
-            changeLanguage(this.value);
-        });
-    }
-    
-    if (profileLanguageSelect) {
-        profileLanguageSelect.value = AppState.language;
-        profileLanguageSelect.addEventListener('change', function() {
             changeLanguage(this.value);
         });
     }
@@ -999,7 +826,7 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
             
-            if (href === '#home' || href === '#about' || href === '#products' || href === '#contact' || href === '#profile' || href === '#settings') {
+            if (href.startsWith('#') && href.length > 1) {
                 e.preventDefault();
                 
                 // Mettre à jour la navigation active
@@ -1007,42 +834,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     navLink.classList.remove('active');
                 });
                 
-                if (href !== '#profile' && href !== '#settings') {
-                    this.classList.add('active');
-                }
+                this.classList.add('active');
                 
-                // Afficher la section correspondante
-                if (href === '#profile' || href === '#settings') {
-                    // Afficher la section profil
-                    document.querySelectorAll('main > section').forEach(section => {
-                        section.style.display = 'none';
-                    });
-                    
-                    const profileSection = document.getElementById('profile');
-                    if (profileSection) {
-                        profileSection.style.display = 'block';
-                        
-                        // Afficher la bonne sous-section
-                        if (href === '#settings') {
-                            toggleProfileSection('settings');
-                        } else {
-                            toggleProfileSection('profile-info');
-                        }
-                    }
-                } else {
-                    // Masquer la section profil
-                    const profileSection = document.getElementById('profile');
-                    if (profileSection) {
-                        profileSection.style.display = 'none';
-                    }
-                    
-                    // Afficher la section correspondante
-                    document.querySelectorAll('main > section').forEach(section => {
-                        if (section.id === href.substring(1)) {
-                            section.style.display = 'block';
-                        } else if (section.id !== 'profile') {
-                            section.style.display = 'none';
-                        }
+                // Scroll vers la section
+                const targetId = href.substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
                     });
                 }
                 
@@ -1051,15 +852,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     mobileMenu.classList.remove('open');
                 }
             }
-        });
-    });
-    
-    // Navigation du profil
-    document.querySelectorAll('.profile-nav-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const sectionId = this.getAttribute('href').substring(1);
-            toggleProfileSection(sectionId);
         });
     });
     
@@ -1072,7 +864,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('signup-btn')?.addEventListener('click', () => openModal('signup-modal'));
     document.getElementById('mobile-login-btn')?.addEventListener('click', () => openModal('login-modal'));
     document.getElementById('mobile-signup-btn')?.addEventListener('click', () => openModal('signup-modal'));
-    document.getElementById('add-product-btn')?.addEventListener('click', () => openModal('add-product-modal'));
     document.getElementById('switch-to-signup')?.addEventListener('click', () => {
         closeModal('login-modal');
         openModal('signup-modal');
@@ -1142,26 +933,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Formulaire d'ajout de produit
-    const addProductForm = document.getElementById('add-product-form');
-    if (addProductForm) {
-        addProductForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const productData = {
-                name: document.getElementById('product-name').value,
-                description: document.getElementById('product-description').value,
-                price: parseFloat(document.getElementById('product-price').value),
-                stock: parseInt(document.getElementById('product-stock').value),
-                category: document.getElementById('product-category').value,
-                image: document.getElementById('product-image').value,
-                features: document.getElementById('product-features').value.split('\n').filter(f => f.trim() !== '')
-            };
-            
-            addProduct(productData);
-        });
-    }
-    
     // Formulaire de contact
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
@@ -1190,67 +961,40 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Édition du profil
-    const editProfileBtn = document.getElementById('edit-profile-btn');
-    const saveProfileBtn = document.getElementById('save-profile-btn');
-    
-    if (editProfileBtn) {
-        editProfileBtn.addEventListener('click', function() {
-            // Activer les champs
-            document.getElementById('first-name').disabled = false;
-            document.getElementById('last-name').disabled = false;
-            document.getElementById('user-phone').disabled = false;
+    // Bouton de rafraîchissement des produits
+    const refreshBtn = document.getElementById('refresh-products');
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', function() {
+            this.disabled = true;
+            const originalHTML = this.innerHTML;
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Chargement...';
             
-            // Afficher le bouton de sauvegarde
-            this.style.display = 'none';
-            if (saveProfileBtn) {
-                saveProfileBtn.style.display = 'inline-block';
-            }
+            loadProducts();
+            
+            setTimeout(() => {
+                this.disabled = false;
+                this.innerHTML = originalHTML;
+            }, 2000);
         });
     }
     
-    if (saveProfileBtn) {
-        saveProfileBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Simuler la sauvegarde
-            showNotification('Profil mis à jour avec succès !', 'success');
-            
-            // Désactiver les champs
-            document.getElementById('first-name').disabled = true;
-            document.getElementById('last-name').disabled = true;
-            document.getElementById('user-phone').disabled = true;
-            
-            // Afficher le bouton d'édition
-            this.style.display = 'none';
-            if (editProfileBtn) {
-                editProfileBtn.style.display = 'inline-block';
-            }
-        });
-    }
+    // Écouter les messages depuis le panel admin
+    window.addEventListener('message', function(event) {
+        if (event.data && event.data.type === 'RELOAD_PRODUCTS') {
+            console.log('🔄 Rechargement des produits demandé depuis le panel admin');
+            showNotification('Nouveaux produits disponibles !', 'info');
+            loadProducts();
+        }
+    });
     
-    // Déconnexion (simulée)
-    const deleteAccountBtn = document.getElementById('delete-account-btn');
-    if (deleteAccountBtn) {
-        deleteAccountBtn.addEventListener('click', function() {
-            if (confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.')) {
-                // Simuler la suppression
-                AppState.currentUser = null;
-                localStorage.removeItem('es-parfumerie-user');
-                
-                // Mettre à jour l'interface
-                updateUserInterface();
-                
-                // Afficher une notification
-                showNotification('Votre compte a été supprimé.', 'info');
-                
-                // Revenir à l'accueil
-                document.querySelector('a[href="#home"]').click();
-            }
-        });
-    }
+    // Rafraîchir les produits toutes les 60 secondes
+    setInterval(() => {
+        if (document.visibilityState === 'visible') {
+            loadProducts();
+        }
+    }, 60000);
     
-    // Ajouter des styles pour les notifications
+    // Ajouter les styles pour les notifications
     const style = document.createElement('style');
     style.textContent = `
         .notification {
