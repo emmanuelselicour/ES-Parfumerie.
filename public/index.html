@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES Parfumerie - Parfums de Luxe</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+<body>
+    <!-- En-tête et navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <a href="index.html">
+                        <h1><span class="logo-es">ES</span> Parfumerie</h1>
+                    </a>
+                </div>
+                
+                <div class="nav-links">
+                    <ul>
+                        <li><a href="#home" class="active" data-i18n="nav.home">Accueil</a></li>
+                        <li><a href="#about" data-i18n="nav.about">À propos</a></li>
+                        <li><a href="#products" data-i18n="nav.products">Produits</a></li>
+                        <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+                        <li><a href="#profile" data-i18n="nav.profile">Profil</a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-actions">
+                    <button id="theme-toggle" class="icon-btn" aria-label="Changer de thème">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    
+                    <div class="language-selector">
+                        <select id="language-select">
+                            <option value="fr" selected>FR</option>
+                            <option value="en">EN</option>
+                            <option value="es">ES</option>
+                        </select>
+                    </div>
+                    
+                    <div class="auth-buttons">
+                        <button id="login-btn" class="btn-outline" data-i18n="nav.login">Connexion</button>
+                        <button id="signup-btn" class="btn-primary" data-i18n="nav.signup">Inscription</button>
+                    </div>
+                    
+                    <div class="cart-icon">
+                        <a href="#cart" aria-label="Panier">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                    </div>
+                    
+                    <button class="menu-toggle" id="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Menu mobile -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-header">
+            <h3><span class="logo-es">ES</span> Parfumerie</h3>
+            <button class="close-menu" id="close-menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul>
+            <li><a href="#home" class="active" data-i18n="nav.home">Accueil</a></li>
+            <li><a href="#about" data-i18n="nav.about">À propos</a></li>
+            <li><a href="#products" data-i18n="nav.products">Produits</a></li>
+            <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+            <li><a href="#profile" data-i18n="nav.profile">Profil</a></li>
+            <li><a href="#settings" data-i18n="nav.settings">Paramètres</a></li>
+        </ul>
+        <div class="mobile-menu-footer">
+            <div class="auth-buttons-mobile">
+                <button id="mobile-login-btn" class="btn-outline" data-i18n="nav.login">Connexion</button>
+                <button id="mobile-signup-btn" class="btn-primary" data-i18n="nav.signup">Inscription</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenu principal -->
+    <main>
+        <!-- Section Accueil -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2 data-i18n="hero.title">L'art de la fragrance</h2>
+                    <p data-i18n="hero.subtitle">Découvrez notre collection exclusive de parfums pour homme et femme. Des senteurs uniques qui racontent votre histoire.</p>
+                    <div class="hero-buttons">
+                        <a href="#products" class="btn-primary" data-i18n="hero.shop">Découvrir la collection</a>
+                        <a href="#about" class="btn-outline" data-i18n="hero.learn">En savoir plus</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="perfume-bottle">
+                        <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Flacon de parfum de luxe">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section À propos -->
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title" data-i18n="about.title">À propos de ES Parfumerie</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p data-i18n="about.text1">Depuis 2010, ES Parfumerie offre une sélection rigoureuse des plus belles fragrances du monde. Notre passion pour les parfums nous pousse à rechercher constamment l'excellence et l'authenticité.</p>
+                        <p data-i18n="about.text2">Nous collaborons avec les meilleurs nez et maisons de parfum pour vous proposer des senteurs uniques, alliant tradition et innovation.</p>
+                        <div class="about-features">
+                            <div class="feature">
+                                <i class="fas fa-award"></i>
+                                <h4 data-i18n="about.feature1.title">Qualité Premium</h4>
+                                <p data-i18n="about.feature1.text">Sélection des meilleurs ingrédients</p>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-leaf"></i>
+                                <h4 data-i18n="about.feature2.title">Ingrédients Naturels</h4>
+                                <p data-i18n="about.feature2.text">Formules respectueuses de l'environnement</p>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-shipping-fast"></i>
+                                <h4 data-i18n="about.feature3.title">Livraison Rapide</h4>
+                                <p data-i18n="about.feature3.text">Expédition sous 48h en France</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1590736969956-6d9c2a8d6977?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Boutique de parfumerie">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Produits -->
+        <section id="products" class="products">
+            <div class="container">
+                <h2 class="section-title" data-i18n="products.title">Nos Parfums</h2>
+                <p class="section-subtitle" data-i18n="products.subtitle">Découvrez notre collection exclusive. Actuellement, aucun produit n'est disponible.</p>
+                
+                <div class="products-filter">
+                    <button class="filter-btn active" data-filter="all" data-i18n="products.all">Tous</button>
+                    <button class="filter-btn" data-filter="men" data-i18n="products.men">Homme</button>
+                    <button class="filter-btn" data-filter="women" data-i18n="products.women">Femme</button>
+                    <button class="filter-btn" data-filter="unisex" data-i18n="products.unisex">Unisex</button>
+                </div>
+                
+                <div class="products-grid" id="products-grid">
+                    <!-- Les produits seront chargés dynamiquement depuis l'API -->
+                    <div class="no-products">
+                        <i class="fas fa-box-open"></i>
+                        <h3 data-i18n="products.empty">Aucun produit disponible</h3>
+                        <p data-i18n="products.emptyDesc">Notre collection sera bientôt disponible. Revenez plus tard !</p>
+                    </div>
+                </div>
+                
+                <!-- Admin seulement - Bouton pour ajouter des produits -->
+                <div class="admin-actions" id="admin-actions" style="display: none;">
+                    <button id="add-product-btn" class="btn-primary">
+                        <i class="fas fa-plus"></i> 
+                        <span data-i18n="products.add">Ajouter un produit</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Contact -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section-title" data-i18n="contact.title">Contactez-nous</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4 data-i18n="contact.address">Adresse</h4>
+                                <p>123 Avenue des Champs-Élysées, 75008 Paris, France</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4 data-i18n="contact.phone">Téléphone</h4>
+                                <p>+33 1 23 45 67 89</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4 data-i18n="contact.email">Email</h4>
+                                <p>contact@es-parfumerie.com</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4 data-i18n="contact.hours">Horaires d'ouverture</h4>
+                                <p data-i18n="contact.hoursDetail">Lun-Ven: 10h-19h<br>Samedi: 10h-20h<br>Dimanche: 11h-18h</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <form id="contact-form">
+                            <div class="form-group">
+                                <input type="text" id="contact-name" placeholder=" " required>
+                                <label for="contact-name" data-i18n="contact.formName">Nom complet</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="contact-email" placeholder=" " required>
+                                <label for="contact-email" data-i18n="contact.formEmail">Adresse email</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="contact-subject" placeholder=" ">
+                                <label for="contact-subject" data-i18n="contact.formSubject">Sujet (optionnel)</label>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="contact-message" placeholder=" " rows="4" required></textarea>
+                                <label for="contact-message" data-i18n="contact.formMessage">Votre message</label>
+                            </div>
+                            <button type="submit" class="btn-primary" data-i18n="contact.send">Envoyer le message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Profil -->
+        <section id="profile" class="profile" style="display: none;">
+            <div class="container">
+                <h2 class="section-title" data-i18n="profile.title">Mon Profil</h2>
+                <div class="profile-content">
+                    <div class="profile-sidebar">
+                        <div class="profile-info">
+                            <div class="profile-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <h3 id="profile-name">Invité</h3>
+                            <p id="profile-email">Non connecté</p>
+                        </div>
+                        <nav class="profile-nav">
+                            <ul>
+                                <li><a href="#profile-info" class="profile-nav-link active" data-i18n="profile.info">Informations</a></li>
+                                <li><a href="#profile-orders" class="profile-nav-link" data-i18n="profile.orders">Commandes</a></li>
+                                <li><a href="#profile-wishlist" class="profile-nav-link" data-i18n="profile.wishlist">Liste de souhaits</a></li>
+                                <li><a href="#profile-addresses" class="profile-nav-link" data-i18n="profile.addresses">Adresses</a></li>
+                                <li><a href="#settings" class="profile-nav-link" data-i18n="profile.settings">Paramètres</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="profile-main">
+                        <!-- Informations utilisateur -->
+                        <div id="profile-info" class="profile-section active">
+                            <h3 data-i18n="profile.info">Informations personnelles</h3>
+                            <form id="profile-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <input type="text" id="first-name" placeholder=" " disabled>
+                                        <label for="first-name" data-i18n="profile.firstName">Prénom</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" id="last-name" placeholder=" " disabled>
+                                        <label for="last-name" data-i18n="profile.lastName">Nom</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" id="user-email" placeholder=" " disabled>
+                                    <label for="user-email" data-i18n="profile.email">Email</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" id="user-phone" placeholder=" " disabled>
+                                    <label for="user-phone" data-i18n="profile.phone">Téléphone</label>
+                                </div>
+                                <button type="button" id="edit-profile-btn" class="btn-outline" data-i18n="profile.edit">Modifier le profil</button>
+                                <button type="submit" id="save-profile-btn" class="btn-primary" style="display: none;" data-i18n="profile.save">Enregistrer</button>
+                            </form>
+                        </div>
+                        
+                        <!-- Commandes -->
+                        <div id="profile-orders" class="profile-section">
+                            <h3 data-i18n="profile.orders">Mes commandes</h3>
+                            <div class="no-orders">
+                                <i class="fas fa-shopping-bag"></i>
+                                <p data-i18n="profile.noOrders">Vous n'avez pas encore passé de commande</p>
+                                <a href="#products" class="btn-primary" data-i18n="profile.shopNow">Acheter maintenant</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Liste de souhaits -->
+                        <div id="profile-wishlist" class="profile-section">
+                            <h3 data-i18n="profile.wishlist">Ma liste de souhaits</h3>
+                            <div class="no-wishlist">
+                                <i class="fas fa-heart"></i>
+                                <p data-i18n="profile.noWishlist">Votre liste de souhaits est vide</p>
+                                <a href="#products" class="btn-primary" data-i18n="profile.browse">Parcourir les produits</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Adresses -->
+                        <div id="profile-addresses" class="profile-section">
+                            <h3 data-i18n="profile.addresses">Mes adresses</h3>
+                            <div class="no-addresses">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <p data-i18n="profile.noAddresses">Aucune adresse enregistrée</p>
+                                <button id="add-address-btn" class="btn-primary" data-i18n="profile.addAddress">Ajouter une adresse</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Paramètres -->
+                        <div id="settings" class="profile-section">
+                            <h3 data-i18n="settings.title">Paramètres</h3>
+                            <div class="settings-options">
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4 data-i18n="settings.notifications">Notifications</h4>
+                                        <p data-i18n="settings.notificationsDesc">Recevoir des emails promotionnels et des mises à jour</p>
+                                    </div>
+                                    <label class="switch">
+                                        <input type="checkbox" id="notification-toggle" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4 data-i18n="settings.darkMode">Mode sombre</h4>
+                                        <p data-i18n="settings.darkModeDesc">Activer/désactiver le thème sombre</p>
+                                    </div>
+                                    <label class="switch">
+                                        <input type="checkbox" id="dark-mode-toggle">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4 data-i18n="settings.language">Langue</h4>
+                                        <p data-i18n="settings.languageDesc">Changer la langue du site</p>
+                                    </div>
+                                    <select id="profile-language-select">
+                                        <option value="fr" selected>Français</option>
+                                        <option value="en">English</option>
+                                        <option value="es">Español</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="settings-danger">
+                                <h4 data-i18n="settings.danger">Zone dangereuse</h4>
+                                <button id="delete-account-btn" class="btn-danger" data-i18n="settings.deleteAccount">Supprimer mon compte</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <h2><span class="logo-es">ES</span> Parfumerie</h2>
+                    </div>
+                    <p data-i18n="footer.description">Votre destination pour des parfums d'exception depuis 2010.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 data-i18n="footer.links">Liens rapides</h3>
+                    <ul>
+                        <li><a href="#home" data-i18n="nav.home">Accueil</a></li>
+                        <li><a href="#about" data-i18n="nav.about">À propos</a></li>
+                        <li><a href="#products" data-i18n="nav.products">Produits</a></li>
+                        <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 data-i18n="footer.services">Services</h3>
+                    <ul>
+                        <li><a href="#" data-i18n="footer.service1">Conseils personnalisés</a></li>
+                        <li><a href="#" data-i18n="footer.service2">Cadeaux & coffrets</a></li>
+                        <li><a href="#" data-i18n="footer.service3">Échantillons gratuits</a></li>
+                        <li><a href="#" data-i18n="footer.service4">Retours gratuits</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 data-i18n="footer.contact">Contact</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Avenue des Champs-Élysées, Paris</li>
+                        <li><i class="fas fa-phone"></i> +33 1 23 45 67 89</li>
+                        <li><i class="fas fa-envelope"></i> contact@es-parfumerie.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year">2023</span> ES Parfumerie. <span data-i18n="footer.rights">Tous droits réservés.</span></p>
+                <div class="footer-links">
+                    <a href="#" data-i18n="footer.privacy">Politique de confidentialité</a>
+                    <a href="#" data-i18n="footer.terms">Conditions d'utilisation</a>
+                    <a href="#" data-i18n="footer.cookies">Politique des cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <!-- Modal Connexion -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 data-i18n="login.title">Connexion</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="login-form">
+                    <div class="form-group">
+                        <input type="email" id="login-email" placeholder=" " required>
+                        <label for="login-email" data-i18n="login.email">Adresse email</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="login-password" placeholder=" " required>
+                        <label for="login-password" data-i18n="login.password">Mot de passe</label>
+                    </div>
+                    <div class="form-options">
+                        <label class="checkbox">
+                            <input type="checkbox" id="remember-me">
+                            <span data-i18n="login.remember">Se souvenir de moi</span>
+                        </label>
+                        <a href="#" class="forgot-password" data-i18n="login.forgot">Mot de passe oublié?</a>
+                    </div>
+                    <button type="submit" class="btn-primary" data-i18n="login.submit">Se connecter</button>
+                </form>
+                <div class="modal-footer">
+                    <p data-i18n="login.noAccount">Pas encore de compte?</p>
+                    <button id="switch-to-signup" class="btn-text" data-i18n="login.createAccount">Créer un compte</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Inscription -->
+    <div class="modal" id="signup-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 data-i18n="signup.title">Créer un compte</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="signup-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" id="signup-firstname" placeholder=" " required>
+                            <label for="signup-firstname" data-i18n="signup.firstName">Prénom</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="signup-lastname" placeholder=" " required>
+                            <label for="signup-lastname" data-i18n="signup.lastName">Nom</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="signup-email" placeholder=" " required>
+                        <label for="signup-email" data-i18n="signup.email">Adresse email</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="signup-password" placeholder=" " required>
+                        <label for="signup-password" data-i18n="signup.password">Mot de passe</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="signup-confirm" placeholder=" " required>
+                        <label for="signup-confirm" data-i18n="signup.confirm">Confirmer le mot de passe</label>
+                    </div>
+                    <div class="form-options">
+                        <label class="checkbox">
+                            <input type="checkbox" id="terms" required>
+                            <span data-i18n="signup.terms">J'accepte les <a href="#">conditions d'utilisation</a></span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-primary" data-i18n="signup.submit">Créer mon compte</button>
+                </form>
+                <div class="modal-footer">
+                    <p data-i18n="signup.haveAccount">Vous avez déjà un compte?</p>
+                    <button id="switch-to-login" class="btn-text" data-i18n="signup.login">Se connecter</button>
+                </div>
+            </div>
+        </div>
+    </modal>
+
+    <!-- Modal Ajouter Produit (Admin) -->
+    <div class="modal" id="add-product-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 data-i18n="product.addTitle">Ajouter un nouveau produit</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="add-product-form">
+                    <div class="form-group">
+                        <input type="text" id="product-name" placeholder=" " required>
+                        <label for="product-name" data-i18n="product.name">Nom du produit</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="product-description" placeholder=" " rows="3" required></textarea>
+                        <label for="product-description" data-i18n="product.description">Description</label>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="number" id="product-price" placeholder=" " step="0.01" min="0" required>
+                            <label for="product-price" data-i18n="product.price">Prix (€)</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" id="product-stock" placeholder=" " min="0" required>
+                            <label for="product-stock" data-i18n="product.stock">Stock</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <select id="product-category" required>
+                            <option value="" disabled selected data-i18n="product.selectCategory">Sélectionner une catégorie</option>
+                            <option value="men" data-i18n="products.men">Homme</option>
+                            <option value="women" data-i18n="products.women">Femme</option>
+                            <option value="unisex" data-i18n="products.unisex">Unisex</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-image" data-i18n="product.image">Image URL</label>
+                        <input type="text" id="product-image" placeholder="https://exemple.com/image.jpg" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-features" data-i18n="product.features">Caractéristiques (une par ligne)</label>
+                        <textarea id="product-features" placeholder=" " rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary" data-i18n="product.add">Ajouter le produit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chargement des scripts -->
+    <script src="js/app.js"></script>
+</body>
+</html>
