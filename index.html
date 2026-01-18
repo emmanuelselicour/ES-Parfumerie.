@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ES Parfumerie</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">ES Parfumerie</div>
+
+    <nav class="nav">
+      <a href="#home" class="nav-link">Accueil</a>
+      <a href="#about" class="nav-link">À propos</a>
+      <a href="#products" class="nav-link">Produits</a>
+      <a href="#contact" class="nav-link">Contact</a>
+      <a href="#profile" class="nav-link auth-only">Profile</a>
+      <a href="#settings" class="nav-link auth-only">Paramètres</a>
+    </nav>
+
+    <div class="actions">
+      <button id="langBtn" class="btn">FR</button>
+      <button id="themeBtn" class="btn">🌙</button>
+      <button id="loginBtn" class="btn primary">Se connecter</button>
+    </div>
+
+    <button class="burger" id="burger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <main>
+    <!-- HOME -->
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <h1 data-i18n="hero_title">Bienvenue chez ES Parfumerie</h1>
+        <p data-i18n="hero_desc">Les meilleurs parfums, au meilleur prix.</p>
+        <div class="hero-buttons">
+          <button class="btn primary" onclick="scrollToSection('products')" data-i18n="hero_shop">Voir les produits</button>
+          <button class="btn" onclick="scrollToSection('about')" data-i18n="hero_about">En savoir plus</button>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="hero-badge" data-i18n="hero_badge">Parfums authentiques</div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="container">
+        <h2 data-i18n="about_title">À propos</h2>
+        <p data-i18n="about_desc">
+          ES Parfumerie est votre boutique en ligne de parfums de qualité. Nous offrons une sélection premium avec livraison rapide.
+        </p>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section id="products" class="section products">
+      <div class="container">
+        <h2 data-i18n="products_title">Produits</h2>
+        <div id="productGrid" class="grid">
+          <!-- Produits chargés ici -->
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="container">
+        <h2 data-i18n="contact_title">Contact</h2>
+        <p data-i18n="contact_desc">Pour toute question, contactez-nous via WhatsApp ou email.</p>
+      </div>
+    </section>
+
+    <!-- PROFILE (protégé) -->
+    <section id="profile" class="section auth-only">
+      <div class="container">
+        <h2 data-i18n="profile_title">Profile</h2>
+        <p data-i18n="profile_desc">Vous devez être connecté pour voir cette page.</p>
+      </div>
+    </section>
+
+    <!-- SETTINGS (protégé) -->
+    <section id="settings" class="section auth-only">
+      <div class="container">
+        <h2 data-i18n="settings_title">Paramètres</h2>
+        <p data-i18n="settings_desc">Vous devez être connecté pour accéder aux paramètres.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <div>© 2026 ES Parfumerie</div>
+      <div>Site codé par : TRUE MANNO</div>
+    </div>
+  </footer>
+
+  <script>
+    // --------- VARIABLES -----------
+    const API_URL = "https://es-parfumerie-backend.onrender.com";
+    const LANG = { current: "fr" };
+    const LANG_TEXTS = {
+      fr: {
+        hero_title: "Bienvenue chez ES Parfumerie",
+        hero_desc: "Les meilleurs parfums, au meilleur prix.",
+        hero_shop: "Voir les produits",
+        hero_about: "En savoir plus",
+        hero_badge: "Parfums authentiques",
+        about_title: "À propos",
+        about_desc: "ES Parfumerie est votre boutique en ligne de parfums de qualité. Nous offrons une sélection premium avec livraison rapide.",
+        products_title: "Produits",
+        contact_title: "Contact",
+        contact_desc: "Pour toute question, contactez-nous via WhatsApp ou email.",
+        profile_title: "Profile",
+        profile_desc: "Vous devez être connecté pour voir cette page.",
+        settings_title: "Paramètres",
+        settings_desc: "Vous devez être connecté pour accéder aux paramètres."
+      },
+      en: {
+        hero_title: "Welcome to ES Perfumery",
+        hero_desc: "The best perfumes, at the best price.",
+        hero_shop: "See products",
+        hero_about: "Learn more",
+        hero_badge: "Authentic perfumes",
+        about_title: "About",
+        about_desc: "ES Perfumery is your online store for quality perfumes. We offer premium selection with fast delivery.",
+        products_title: "Products",
+        contact_title: "Contact",
+        contact_desc: "For any question, contact us via WhatsApp or email.",
+        profile_title: "Profile",
+        profile_desc: "You must be logged in to view this page.",
+        settings_title: "Settings",
+        settings_desc: "You must be logged in to access settings."
+      },
+      es: {
+        hero_title: "Bienvenido a ES Perfumería",
+        hero_desc: "Los mejores perfumes, al mejor precio.",
+        hero_shop: "Ver productos",
+        hero_about: "Saber más",
+        hero_badge: "Perfumes auténticos",
+        about_title: "Sobre nosotros",
+        about_desc: "ES Perfumería es tu tienda online de perfumes de calidad. Ofrecemos selección premium con entrega rápida.",
+        products_title: "Productos",
+        contact_title: "Contacto",
+        contact_desc: "Para cualquier pregunta, contáctanos por WhatsApp o email.",
+        profile_title: "Perfil",
+        profile_desc: "Debes iniciar sesión para ver esta página.",
+        settings_title: "Configuración",
+        settings_desc: "Debes iniciar sesión para acceder a la configuración."
+      }
+    };
+
+    // --------- LANG & THEME -----------
+    const langBtn = document.getElementById("langBtn");
+    const themeBtn = document.getElementById("themeBtn");
+    const loginBtn = document.getElementById("loginBtn");
+
+    function translatePage() {
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        el.innerText = LANG_TEXTS[LANG.current][key];
+      });
+      langBtn.innerText = LANG.current.toUpperCase();
+    }
+
+    langBtn.addEventListener("click", () => {
+      LANG.current = LANG.current === "fr" ? "en" : LANG.current === "en" ? "es" : "fr";
+      translatePage();
+    });
+
+    // THEME
+    themeBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      themeBtn.innerText = document.body.classList.contains("dark") ? "☀️" : "🌙";
+    });
+
+    // --------- NAV MENU MOBILE -----------
+    const burger = document.getElementById("burger");
+    const nav = document.querySelector(".nav");
+
+    burger.addEventListener("click", () => {
+      nav.classList.toggle("nav-open");
+    });
+
+    // --------- SCROLL TO SECTION -----------
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+    }
+
+    // --------- AUTH CHECK (SIMPLIFIED) -----------
+    // (IMPORTANT) on utilisera JWT plus tard.
+    function checkAuth() {
+      return false; // for now, user is NOT logged in
+    }
+
+    function updateAuthUI() {
+      const auth = checkAuth();
+      document.querySelectorAll(".auth-only").forEach(el => {
+        el.style.display = auth ? "block" : "none";
+      });
+      loginBtn.innerText = auth ? "Déconnexion" : "Se connecter";
+    }
+
+    loginBtn.addEventListener("click", () => {
+      // redirection vers login page
+      window.location.href = "/login.html";
+    });
+
+    // --------- FETCH PRODUCTS -----------
+    async function loadProducts() {
+      try {
+        const res = await fetch(API_URL + "/products");
+        const data = await res.json();
+
+        const grid = document.getElementById("productGrid");
+        grid.innerHTML = "";
+
+        if (!data || data.length === 0) {
+          grid.innerHTML = `<div class="empty" data-i18n="empty_products">Aucun produit pour le moment.</div>`;
+          translatePage();
+          return;
+        }
+
+        data.forEach(p => {
+          grid.innerHTML += `
+            <div class="card">
+              <img src="${p.image}" alt="${p.name}">
+              <h3>${p.name}</h3>
+              <p>${p.description}</p>
+              <div class="price">${p.price} HTG</div>
+              <button class="btn primary" onclick="buyProduct('${p._id}')">Acheter</button>
+            </div>
+          `;
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    function buyProduct(id) {
+      // check auth
+      if (!checkAuth()) {
+        alert("Vous devez être connecté pour acheter.");
+        window.location.href = "/login.html";
+        return;
+      }
+      // add to cart (future)
+      alert("Produit ajouté au panier (fonctionnalité à venir)");
+    }
+
+    // --------- INITIALIZE -----------
+    translatePage();
+    updateAuthUI();
+    loadProducts();
+  </script>
+
+  <style>
+    /* ====== RESET ====== */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+    html, body { height: 100%; }
+
+    /* ====== VARIABLES ====== */
+    :root{
+      --bg: #f6f7fb;
+      --text: #111;
+      --card: #fff;
+      --primary: #6a3cf6;
+      --secondary: #ff6b6b;
+      --shadow: rgba(0,0,0,0.1);
+    }
+
+    body.dark{
+      --bg: #0b0f1a;
+      --text: #f5f5f7;
+      --card: #121827;
+      --shadow: rgba(0,0,0,0.5);
+    }
+
+    body{
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    /* ====== HEADER ====== */
+    .header{
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--card);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      box-shadow: 0 2px 10px var(--shadow);
+    }
+
+    .logo{
+      font-weight: bold;
+      font-size: 22px;
+      letter-spacing: 1px;
+    }
+
+    .nav{
+      display: flex;
+      gap: 14px;
+    }
+
+    .nav-link{
+      text-decoration: none;
+      color: var(--text);
+      padding: 8px 10px;
+      border-radius: 10px;
+      transition: background 0.3s;
+    }
+
+    .nav-link:hover{
+      background: rgba(106, 60, 246, 0.1);
+    }
+
+    .actions{
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn{
+      border: 1px solid var(--shadow);
+      background: var(--card);
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(106, 60, 246, 0.08);
+    }
+
+    .btn.primary{
+      background: var(--primary);
+      color: #fff;
+      border: none;
+    }
+
+    .burger{
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    .burger span{
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+    }
+
+    /* ====== HERO ====== */
+    .hero{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 80px 20px;
+      gap: 40px;
+    }
+
+    .hero-content h1{
+      font-size: 42px;
+      margin-bottom: 20px;
+    }
+
+    .hero-content p{
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .hero-buttons{
+      display: flex;
+      gap: 12px;
+    }
+
+    .hero-image{
+      background: var(--card);
+      border-radius: 20px;
+      height: 300px;
+      position: relative;
+      box-shadow: 0 20px 60px var(--shadow);
+    }
+
+    .hero-badge{
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      padding: 10px 14px;
+      border-radius: 12px;
