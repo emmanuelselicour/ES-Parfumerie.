@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Admin | ES Parfumerie</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="admin-page">
+    <div class="admin-card">
+      <h2>Panel Admin</h2>
+
+      <div class="form">
+        <input type="text" id="name" placeholder="Nom du produit">
+        <input type="text" id="desc" placeholder="Description">
+        <input type="number" id="price" placeholder="Prix">
+        <input type="text" id="image" placeholder="URL image">
+
+        <button class="btn primary" id="addBtn">Ajouter</button>
+      </div>
+
+      <h3>Produits</h3>
+      <div id="products"></div>
+
+      <h3>Commandes</h3>
+      <div id="orders"></div>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = "https://es-parfumerie-backend.onrender.com";
+
+    function getToken() {
+      return localStorage.getItem("token");
+    }
+
+    async function loadProducts() {
+      const res = await fetch(API_URL + "/admin/products");
+      const data = await res.json();
+
+      const container = document.getElementById("products");
+      container.innerHTML = "";
+
+      data.forEach(p => {
+        container.innerHTML += `
+          <div class="prod">
+            <img src="${p.image}" width="60">
+            <b>${p.name}</b> - ${p.price} HTG
+            <button onclick="deleteProduct(${p.id})">Supprimer</button>
+          </div>
+        `;
+      });
+    }
+
+    async function loadOrders() {
+      const res = await fetch(API_URL + "/admin/orders", {
+        headers: { "Authorization": "Bearer " + getToken() }
+      });
+      const data = await res.json();
+
+      const container = document.getElementById("orders");
+      container.innerHTML = "";
+
+      data.forEach(o => {
+        container.innerHTML += `
+          <div class="order">
+            <b>Order #${o.id}</b>
+            <p>Total: ${o.total} HTG</p>
+            <p>Status: ${o.status}</p>
+          </div>
+        `;
+      });
+    }
+
+    document.getElementById("addBtn").addEventListener("click", async () => {
+      const name = document.getElementById("name").value;
+      const desc = document.getElementById("desc").value;
+      const price = document.getElementById("price").value;
+      const image = document.getElementById("image").value;
+
+      const res = await fetch(API_URL + "/admin/products", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + getToken()
+        },
+        body: JSON.stringify({ name, description: desc, price, image })
+      });
+
+      if(res.ok){
+        alert("Produit ajouté");
+        loadProducts();
+      }else{
+        alert("Erreur");
+      }
+    });
+
+    async function deleteProduct(id) {
+      await fetch(API_URL + "/admin/products/" + id, {
+        method: "DELETE",
+        headers: { "Authorization": "Bearer " + getToken() }
+      });
+      loadProducts();
+    }
+
+    loadProducts();
+    loadOrders();
+  </script>
+
+  <style>
+    body{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:100vh;
+      background:#f6f7fb;
+      font-family: Arial, sans-serif;
+    }
+    .admin-card{
+      width: 95%;
+      max-width: 900px;
+      padding: 30px;
+      background:#fff;
+      border-radius: 18px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    }
+    .form input{
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      border-radius: 12px;
+      border:1px solid #ddd;
+    }
+    .btn.primary{
+      width:100%;
+      padding: 12px;
+      border:none;
+      background:#6a3cf6;
+      color:#fff;
+      border-radius:12px;
+      cursor:pointer;
+      margin-bottom: 20px;
+    }
+    .prod, .order{
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+  </style>
+</body>
+</html>
