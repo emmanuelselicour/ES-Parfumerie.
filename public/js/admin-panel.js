@@ -1,4 +1,3 @@
-<script>
     // Configuration API
     const API_BASE_URL = 'https://es-parfumerie-backend.onrender.com';
     
@@ -880,4 +879,3 @@
             container.style.display = 'none';
         }, 5000);
     }
-</script>
