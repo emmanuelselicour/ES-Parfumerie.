@@ -1,13 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard Admin</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
 <script>
   if (!localStorage.getItem("admin")) {
     window.location.href = "login.html";
   }
 </script>
 
-<h2>Panel Admin ES Parfumerie</h2>
+<header class="header">
+  <div class="logo">Admin Panel</div>
+  <div>
+    <button onclick="logout()" class="btn">Déconnexion</button>
+  </div>
+</header>
 
-<ul>
-  <li>Ajouter produit</li>
-  <li>Voir commandes</li>
-  <li>Gérer clients</li>
-</ul>
+<section class="section">
+  <h2>Bienvenue Admin</h2>
+  <div class="cards">
+    <div class="card">Ajouter produit</div>
+    <div class="card">Voir commandes</div>
+    <div class="card">Gérer clients</div>
+  </div>
+</section>
+
+<script>
+  function logout() {
+    localStorage.removeItem("admin");
+    window.location.href = "login.html";
+  }
+</script>
+
+</body>
+</html>
