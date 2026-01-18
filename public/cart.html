@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panier - ES Parfumerie</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .cart-container {
+            padding: var(--space-xl) 0;
+            background-color: var(--bg-light);
+            min-height: 60vh;
+        }
+        
+        .cart-header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .cart-header h1 {
+            font-size: 2.5rem;
+            color: var(--text-color);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .cart-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--space-xl);
+        }
+        
+        .cart-items {
+            background: var(--bg-color);
+            border-radius: var(--radius);
+            padding: var(--space-lg);
+            box-shadow: var(--shadow);
+        }
+        
+        .cart-summary {
+            background: var(--bg-color);
+            border-radius: var(--radius);
+            padding: var(--space-lg);
+            box-shadow: var(--shadow);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+        
+        .cart-item {
+            display: flex;
+            gap: var(--space-lg);
+            padding: var(--space-lg) 0;
+            border-bottom: 1px solid var(--border-color);
+            align-items: center;
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .cart-item-image {
+            width: 120px;
+            height: 120px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .cart-item-details {
+            flex-grow: 1;
+        }
+        
+        .cart-item-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            color: var(--text-color);
+        }
+        
+        .cart-item-category {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background-color: var(--bg-light);
+            color: var(--text-light);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .cart-item-price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: var(--space-md);
+        }
+        
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .quantity-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .quantity-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .quantity-input {
+            width: 60px;
+            text-align: center;
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            font-size: 1rem;
+        }
+        
+        .cart-item-remove {
+            margin-left: auto;
+            padding: 0.5rem 1rem;
+            background: none;
+            border: none;
+            color: #e74c3c;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+        
+        .cart-item-remove:hover {
+            color: #c0392b;
+        }
+        
+        .summary-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-md);
+            border-bottom: 2px solid var(--border-color);
+            color: var(--text-color);
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--space-sm) 0;
+            color: var(--text-color);
+        }
+        
+        .summary-total {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-top: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 2px solid var(--border-color);
+        }
+        
+        .cart-empty {
+            text-align: center;
+            padding: var(--space-xl);
+            grid-column: 1 / -1;
+        }
+        
+        .cart-empty i {
+            font-size: 4rem;
+            color: var(--border-color);
+            margin-bottom: var(--space-md);
+        }
+        
+        .cart-empty h2 {
+            font-size: 1.75rem;
+            margin-bottom: var(--space-md);
+            color: var(--text-color);
+        }
+        
+        .cart-empty p {
+            color: var(--text-light);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .continue-shopping {
+            margin-top: var(--space-lg);
+            text-align: center;
+        }
+        
+        .checkout-btn {
+            width: 100%;
+            margin-top: var(--space-lg);
+        }
+        
+        .coupon-section {
+            margin-top: var(--space-lg);
+            padding-top: var(--space-lg);
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .coupon-form {
+            display: flex;
+            gap: var(--space-sm);
+        }
+        
+        .coupon-form input {
+            flex-grow: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            font-size: 1rem;
+        }
+        
+        @media (max-width: 1024px) {
+            .cart-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .cart-item {
+                flex-direction: column;
+                text-align: center;
+                gap: var(--space-md);
+            }
+            
+            .cart-item-details {
+                width: 100%;
+            }
+            
+            .cart-item-remove {
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header (identique au site principal) -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <a href="index.html">
+                        <h1><span class="logo-es">ES</span> Parfumerie</h1>
+                    </a>
+                </div>
+                
+                <div class="nav-links">
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="index.html#about">À propos</a></li>
+                        <li><a href="index.html#products">Produits</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-actions">
+                    <button id="theme-toggle" class="icon-btn" aria-label="Changer de thème">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    
+                    <div class="language-selector">
+                        <select id="language-select">
+                            <option value="fr" selected>FR</option>
+                            <option value="en">EN</option>
+                            <option value="es">ES</option>
+                        </select>
+                    </div>
+                    
+                    <div class="auth-buttons">
+                        <button id="login-btn" class="btn-outline">Connexion</button>
+                        <button id="signup-btn" class="btn-primary">Inscription</button>
+                    </div>
+                    
+                    <div class="cart-icon">
+                        <a href="cart.html" aria-label="Panier">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenu principal -->
+    <main class="cart-container">
+        <div class="container">
+            <div class="cart-header">
+                <h1>Votre Panier</h1>
+                <p>Vérifiez vos articles avant de procéder au paiement</p>
+            </div>
+            
+            <div class="cart-content" id="cart-content">
+                <!-- Le contenu du panier sera chargé dynamiquement -->
+                <div class="cart-empty" id="cart-empty">
+                    <i class="fas fa-shopping-bag"></i>
+                    <h2>Votre panier est vide</h2>
+                    <p>Parcourez notre collection et ajoutez vos parfums préférés</p>
+                    <a href="index.html#products" class="btn-primary">Découvrir nos produits</a>
+                </div>
+            </div>
+            
+            <div class="continue-shopping">
+                <a href="index.html#products" class="btn-outline">
+                    <i class="fas fa-arrow-left"></i> Continuer mes achats
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (identique au site principal) -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <h2><span class="logo-es">ES</span> Parfumerie</h2>
+                    </div>
+                    <p>Votre destination pour des parfums d'exception depuis 2010.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Liens rapides</h3>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="index.html#about">À propos</a></li>
+                        <li><a href="index.html#products">Produits</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Conseils personnalisés</a></li>
+                        <li><a href="#">Cadeaux & coffrets</a></li>
+                        <li><a href="#">Échantillons gratuits</a></li>
+                        <li><a href="#">Retours gratuits</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Avenue des Champs-Élysées, Paris</li>
+                        <li><i class="fas fa-phone"></i> +33 1 23 45 67 89</li>
+                        <li><i class="fas fa-envelope"></i> contact@es-parfumerie.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year">2023</span> ES Parfumerie. Tous droits réservés.</p>
+                <div class="footer-links">
+                    <a href="#">Politique de confidentialité</a>
+                    <a href="#">Conditions d'utilisation</a>
+                    <a href="#">Politique des cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals (identique au site principal) -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Connexion</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="login-form">
+                    <div class="form-group">
+                        <input type="email" id="login-email" placeholder=" " required>
+                        <label for="login-email">Adresse email</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="login-password" placeholder=" " required>
+                        <label for="login-password">Mot de passe</label>
+                    </div>
+                    <div class="form-options">
+                        <label class="checkbox">
+                            <input type="checkbox" id="remember-me">
+                            <span>Se souvenir de moi</span>
+                        </label>
+                        <a href="#" class="forgot-password">Mot de passe oublié?</a>
+                    </div>
+                    <button type="submit" class="btn-primary">Se connecter</button>
+                </form>
+                <div class="modal-footer">
+                    <p>Pas encore de compte?</p>
+                    <button id="switch-to-signup" class="btn-text">Créer un compte</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="signup-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Créer un compte</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="signup-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" id="signup-firstname" placeholder=" " required>
+                            <label for="signup-firstname">Prénom</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="signup-lastname" placeholder=" " required>
+                            <label for="signup-lastname">Nom</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="signup-email" placeholder=" " required>
+                        <label for="signup-email">Adresse email</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="signup-password" placeholder=" " required>
+                        <label for="signup-password">Mot de passe</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="signup-confirm" placeholder=" " required>
+                        <label for="signup-confirm">Confirmer le mot de passe</label>
+                    </div>
+                    <div class="form-options">
+                        <label class="checkbox">
+                            <input type="checkbox" id="terms" required>
+                            <span>J'accepte les <a href="#">conditions d'utilisation</a></span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-primary">Créer mon compte</button>
+                </form>
+                <div class="modal-footer">
+                    <p>Vous avez déjà un compte?</p>
+                    <button id="switch-to-login" class="btn-text">Se connecter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Gestion du panier
+        const CartState = {
+            items: [],
+            total: 0,
+            subtotal: 0,
+            shipping: 5.99,
+            taxRate: 0.2 // 20% TVA
+        };
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCart();
+            setupEventListeners();
+        });
+
+        // Charger le panier depuis localStorage
+        function loadCart() {
+            const savedCart = localStorage.getItem('es-parfumerie-cart');
+            
+            if (savedCart) {
+                try {
+                    const cartData = JSON.parse(savedCart);
+                    
+                    // Pour l'exemple, on utilise des produits fictifs
+                    // En production, vous chargeriez les produits depuis l'API
+                    CartState.items = cartData.items || [];
+                    calculateTotals();
+                    displayCart();
+                } catch (error) {
+                    console.error('Erreur lors du chargement du panier:', error);
+                }
+            }
+        }
+
+        // Calculer les totaux
+        function calculateTotals() {
+            CartState.subtotal = CartState.items.reduce((total, item) => {
+                return total + (item.price * item.quantity);
+            }, 0);
+            
+            CartState.tax = CartState.subtotal * CartState.taxRate;
+            CartState.total = CartState.subtotal + CartState.shipping + CartState.tax;
+        }
+
+        // Afficher le panier
+        function displayCart() {
+            const cartContent = document.getElementById('cart-content');
+            const cartEmpty = document.getElementById('cart-empty');
+            
+            if (!cartContent || !cartEmpty) return;
+
+            if (CartState.items.length === 0) {
+                cartEmpty.style.display = 'block';
+                cartContent.innerHTML = '';
+                cartContent.appendChild(cartEmpty);
+                return;
+            }
+
+            cartEmpty.style.display = 'none';
+
+            const cartItemsHTML = CartState.items.map(item => `
+                <div class="cart-item" data-id="${item.id}">
+                    <div class="cart-item-image">
+                        <img src="${item.image || 'https://via.placeholder.com/120'}" alt="${item.name}">
+                    </div>
+                    <div class="cart-item-details">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-category">
+                            ${item.category === 'men' ? 'Homme' : 
+                              item.category === 'women' ? 'Femme' : 'Unisex'}
+                        </div>
+                        <div class="cart-item-price">${item.price.toFixed(2)} €</div>
+                        <div class="cart-item-quantity">
+                            <button class="quantity-btn minus" onclick="updateQuantity(${item.id}, -1)">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="number" class="quantity-input" 
+                                   value="${item.quantity}" min="1" max="${item.stock || 99}"
+                                   onchange="updateQuantityInput(${item.id}, this.value)">
+                            <button class="quantity-btn plus" onclick="updateQuantity(${item.id}, 1)">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <button class="cart-item-remove" onclick="removeItem(${item.id})">
+                        <i class="fas fa-trash"></i> Supprimer
+                    </button>
+                </div>
+            `).join('');
+
+            const summaryHTML = `
+                <div class="cart-summary">
+                    <div class="summary-title">Résumé de la commande</div>
+                    <div class="summary-row">
+                        <span>Sous-total</span>
+                        <span>${CartState.subtotal.toFixed(2)} €</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Livraison</span>
+                        <span>${CartState.shipping.toFixed(2)} €</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>TVA (20%)</span>
+                        <span>${CartState.tax.toFixed(2)} €</span>
+                    </div>
+                    <div class="summary-row summary-total">
+                        <span>Total</span>
+                        <span>${CartState.total.toFixed(2)} €</span>
+                    </div>
+                    
+                    <div class="coupon-section">
+                        <div class="coupon-form">
+                            <input type="text" placeholder="Code promo">
+                            <button type="button" class="btn-outline">Appliquer</button>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-primary checkout-btn" onclick="proceedToCheckout()">
+                        <i class="fas fa-lock"></i> Procéder au paiement
+                    </button>
+                    
+                    <p style="text-align: center; margin-top: 15px; font-size: 0.9rem; color: var(--text-light);">
+                        <i class="fas fa-shield-alt"></i> Paiement sécurisé SSL
+                    </p>
+                </div>
+            `;
+
+            cartContent.innerHTML = `
+                <div class="cart-items">
+                    ${cartItemsHTML}
+                </div>
+                ${summaryHTML}
+            `;
+
+            // Mettre à jour le compteur du panier dans le header
+            updateCartCount();
+        }
+
+        // Mettre à jour la quantité (boutons +/-)
+        function updateQuantity(itemId, change) {
+            const itemIndex = CartState.items.findIndex(item => item.id === itemId);
+            
+            if (itemIndex !== -1) {
+                const newQuantity = CartState.items[itemIndex].quantity + change;
+                
+                if (newQuantity < 1) {
+                    removeItem(itemId);
+                    return;
+                }
+                
+                // Vérifier le stock maximum
+                const maxStock = CartState.items[itemIndex].stock || 99;
+                if (newQuantity > maxStock) {
+                    alert(`Stock limité à ${maxStock} unités`);
+                    return;
+                }
+                
+                CartState.items[itemIndex].quantity = newQuantity;
+                saveCart();
+                calculateTotals();
+                displayCart();
+            }
+        }
+
+        // Mettre à jour la quantité (input)
+        function updateQuantityInput(itemId, value) {
+            const quantity = parseInt(value);
+            
+            if (isNaN(quantity) || quantity < 1) {
+                return;
+            }
+            
+            const itemIndex = CartState.items.findIndex(item => item.id === itemId);
+            
+            if (itemIndex !== -1) {
+                // Vérifier le stock maximum
+                const maxStock = CartState.items[itemIndex].stock || 99;
+                if (quantity > maxStock) {
+                    alert(`Stock limité à ${maxStock} unités`);
+                    CartState.items[itemIndex].quantity = maxStock;
+                } else {
+                    CartState.items[itemIndex].quantity = quantity;
+                }
+                
+                saveCart();
+                calculateTotals();
+                displayCart();
+            }
+        }
+
+        // Supprimer un article
+        function removeItem(itemId) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer cet article du panier ?')) {
+                CartState.items = CartState.items.filter(item => item.id !== itemId);
+                saveCart();
+                calculateTotals();
+                displayCart();
+            }
+        }
+
+        // Sauvegarder le panier
+        function saveCart() {
+            const cartData = {
+                items: CartState.items,
+                timestamp: new Date().getTime()
+            };
+            
+            localStorage.setItem('es-parfumerie-cart', JSON.stringify(cartData));
+        }
+
+        // Mettre à jour le compteur du panier
+        function updateCartCount() {
+            const cartCount = document.querySelector('.cart-count');
+            if (cartCount) {
+                const totalItems = CartState.items.reduce((total, item) => total + item.quantity, 0);
+                cartCount.textContent = totalItems;
+            }
+        }
+
+        // Procéder au paiement
+        function proceedToCheckout() {
+            // Vérifier si l'utilisateur est connecté
+            const currentUser = localStorage.getItem('es-parfumerie-user');
+            
+            if (!currentUser) {
+                alert('Vous devez être connecté pour passer commande.');
+                openModal('login-modal');
+                return;
+            }
+            
+            if (CartState.items.length === 0) {
+                alert('Votre panier est vide.');
+                return;
+            }
+            
+            // Rediriger vers la page de paiement
+            alert('Redirection vers la page de paiement...');
+            // window.location.href = 'checkout.html';
+        }
+
+        // Configurer les événements
+        function setupEventListeners() {
+            // Mode sombre
+            const themeToggle = document.getElementById('theme-toggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleDarkMode);
+            }
+            
+            // Langue
+            const languageSelect = document.getElementById('language-select');
+            if (languageSelect) {
+                languageSelect.addEventListener('change', function() {
+                    // Ici, vous implémenteriez le changement de langue
+                    alert(`Langue changée en ${this.value}`);
+                });
+            }
+            
+            // Modal connexion
+            const loginBtn = document.getElementById('login-btn');
+            if (loginBtn) {
+                loginBtn.addEventListener('click', () => openModal('login-modal'));
+            }
+            
+            // Modal inscription
+            const signupBtn = document.getElementById('signup-btn');
+            if (signupBtn) {
+                signupBtn.addEventListener('click', () => openModal('signup-modal'));
+            }
+            
+            // Basculer entre modals
+            document.getElementById('switch-to-signup')?.addEventListener('click', () => {
+                closeModal('login-modal');
+                openModal('signup-modal');
+            });
+            
+            document.getElementById('switch-to-login')?.addEventListener('click', () => {
+                closeModal('signup-modal');
+                openModal('login-modal');
+            });
+            
+            // Fermer modals
+            document.querySelectorAll('.close-modal').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const modal = this.closest('.modal');
+                    if (modal) {
+                        closeModal(modal.id);
+                    }
+                });
+            });
+        }
+
+        // Fonctions modals
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('active');
+            }
+        }
+        
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('active');
+            }
+        }
+        
+        // Mode sombre
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.querySelector('#theme-toggle i');
+            if (icon) {
+                icon.className = document.body.classList.contains('dark-mode') 
+                    ? 'fas fa-sun' 
+                    : 'fas fa-moon';
+            }
+        }
+    </script>
+</body>
+</html>
