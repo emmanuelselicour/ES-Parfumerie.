@@ -10,30 +10,24 @@ const AppState = {
     cart: [],
     language: 'fr',
     darkMode: false,
-    currentSection: 'home',
-    isLoading: false
+    currentSection: 'home'
 };
 
 // Dictionnaires de traduction
 const translations = {
     fr: {
-        // Navigation
         'nav.home': 'Accueil',
         'nav.about': 'À propos',
         'nav.products': 'Produits',
         'nav.contact': 'Contact',
         'nav.profile': 'Profil',
-        'nav.cart': 'Panier',
+        'nav.settings': 'Paramètres',
         'nav.login': 'Connexion',
         'nav.signup': 'Inscription',
-        
-        // Hero
         'hero.title': 'L\'art de la fragrance',
         'hero.subtitle': 'Découvrez notre collection exclusive de parfums pour homme et femme. Des senteurs uniques qui racontent votre histoire.',
         'hero.shop': 'Découvrir la collection',
         'hero.learn': 'En savoir plus',
-        
-        // About
         'about.title': 'À propos de ES Parfumerie',
         'about.text1': 'Depuis 2010, ES Parfumerie offre une sélection rigoureuse des plus belles fragrances du monde. Notre passion pour les parfums nous pousse à rechercher constamment l\'excellence et l\'authenticité.',
         'about.text2': 'Nous collaborons avec les meilleurs nez et maisons de parfum pour vous proposer des senteurs uniques, alliant tradition et innovation.',
@@ -43,10 +37,8 @@ const translations = {
         'about.feature2.text': 'Formules respectueuses de l\'environnement',
         'about.feature3.title': 'Livraison Rapide',
         'about.feature3.text': 'Expédition sous 48h en France',
-        
-        // Products
         'products.title': 'Nos Parfums',
-        'products.subtitle': 'Découvrez notre collection exclusive',
+        'products.subtitle': 'Découvrez notre collection exclusive.',
         'products.all': 'Tous',
         'products.men': 'Homme',
         'products.women': 'Femme',
@@ -57,8 +49,6 @@ const translations = {
         'products.addToCart': 'Ajouter au panier',
         'products.viewDetails': 'Voir détails',
         'products.outOfStock': 'Rupture de stock',
-        
-        // Contact
         'contact.title': 'Contactez-nous',
         'contact.address': 'Adresse',
         'contact.phone': 'Téléphone',
@@ -70,8 +60,33 @@ const translations = {
         'contact.formSubject': 'Sujet (optionnel)',
         'contact.formMessage': 'Votre message',
         'contact.send': 'Envoyer le message',
-        
-        // Login
+        'profile.title': 'Mon Profil',
+        'profile.info': 'Informations',
+        'profile.orders': 'Commandes',
+        'profile.wishlist': 'Liste de souhaits',
+        'profile.addresses': 'Adresses',
+        'profile.settings': 'Paramètres',
+        'profile.firstName': 'Prénom',
+        'profile.lastName': 'Nom',
+        'profile.email': 'Email',
+        'profile.phone': 'Téléphone',
+        'profile.edit': 'Modifier le profil',
+        'profile.save': 'Enregistrer',
+        'profile.noOrders': 'Vous n\'avez pas encore passé de commande',
+        'profile.shopNow': 'Acheter maintenant',
+        'profile.noWishlist': 'Votre liste de souhaits est vide',
+        'profile.browse': 'Parcourir les produits',
+        'profile.noAddresses': 'Aucune adresse enregistrée',
+        'profile.addAddress': 'Ajouter une adresse',
+        'settings.title': 'Paramètres',
+        'settings.notifications': 'Notifications',
+        'settings.notificationsDesc': 'Recevoir des emails promotionnels et des mises à jour',
+        'settings.darkMode': 'Mode sombre',
+        'settings.darkModeDesc': 'Activer/désactiver le thème sombre',
+        'settings.language': 'Langue',
+        'settings.languageDesc': 'Changer la langue du site',
+        'settings.danger': 'Zone dangereuse',
+        'settings.deleteAccount': 'Supprimer mon compte',
         'login.title': 'Connexion',
         'login.email': 'Adresse email',
         'login.password': 'Mot de passe',
@@ -80,8 +95,6 @@ const translations = {
         'login.submit': 'Se connecter',
         'login.noAccount': 'Pas encore de compte?',
         'login.createAccount': 'Créer un compte',
-        
-        // Signup
         'signup.title': 'Créer un compte',
         'signup.firstName': 'Prénom',
         'signup.lastName': 'Nom',
@@ -92,8 +105,15 @@ const translations = {
         'signup.submit': 'Créer mon compte',
         'signup.haveAccount': 'Vous avez déjà un compte?',
         'signup.login': 'Se connecter',
-        
-        // Footer
+        'product.addTitle': 'Ajouter un nouveau produit',
+        'product.name': 'Nom du produit',
+        'product.description': 'Description',
+        'product.price': 'Prix (€)',
+        'product.stock': 'Stock',
+        'product.selectCategory': 'Sélectionner une catégorie',
+        'product.image': 'Image URL',
+        'product.features': 'Caractéristiques (une par ligne)',
+        'product.add': 'Ajouter le produit',
         'footer.description': 'Votre destination pour des parfums d\'exception depuis 2010.',
         'footer.links': 'Liens rapides',
         'footer.services': 'Services',
@@ -108,23 +128,18 @@ const translations = {
         'footer.cookies': 'Politique des cookies'
     },
     en: {
-        // Navigation
         'nav.home': 'Home',
         'nav.about': 'About',
         'nav.products': 'Products',
         'nav.contact': 'Contact',
         'nav.profile': 'Profile',
-        'nav.cart': 'Cart',
+        'nav.settings': 'Settings',
         'nav.login': 'Login',
         'nav.signup': 'Sign Up',
-        
-        // Hero
         'hero.title': 'The Art of Fragrance',
         'hero.subtitle': 'Discover our exclusive collection of perfumes for men and women. Unique scents that tell your story.',
         'hero.shop': 'Discover the collection',
         'hero.learn': 'Learn more',
-        
-        // About
         'about.title': 'About ES Parfumerie',
         'about.text1': 'Since 2010, ES Parfumerie has offered a rigorous selection of the world\'s finest fragrances. Our passion for perfumes drives us to constantly seek excellence and authenticity.',
         'about.text2': 'We collaborate with the best perfumers and perfume houses to offer you unique scents, combining tradition and innovation.',
@@ -134,21 +149,18 @@ const translations = {
         'about.feature2.text': 'Environmentally friendly formulas',
         'about.feature3.title': 'Fast Delivery',
         'about.feature3.text': 'Shipping within 48h in France',
-        
-        // Products
         'products.title': 'Our Perfumes',
-        'products.subtitle': 'Discover our exclusive collection',
+        'products.subtitle': 'Discover our exclusive collection.',
         'products.all': 'All',
         'products.men': 'Men',
         'products.women': 'Women',
         'products.unisex': 'Unisex',
         'products.empty': 'No products available',
         'products.emptyDesc': 'Our collection will be available soon. Come back later!',
+        'products.add': 'Add a product',
         'products.addToCart': 'Add to cart',
         'products.viewDetails': 'View details',
         'products.outOfStock': 'Out of stock',
-        
-        // Contact
         'contact.title': 'Contact Us',
         'contact.address': 'Address',
         'contact.phone': 'Phone',
@@ -160,8 +172,33 @@ const translations = {
         'contact.formSubject': 'Subject (optional)',
         'contact.formMessage': 'Your message',
         'contact.send': 'Send message',
-        
-        // Login
+        'profile.title': 'My Profile',
+        'profile.info': 'Information',
+        'profile.orders': 'Orders',
+        'profile.wishlist': 'Wishlist',
+        'profile.addresses': 'Addresses',
+        'profile.settings': 'Settings',
+        'profile.firstName': 'First name',
+        'profile.lastName': 'Last name',
+        'profile.email': 'Email',
+        'profile.phone': 'Phone',
+        'profile.edit': 'Edit profile',
+        'profile.save': 'Save',
+        'profile.noOrders': 'You haven\'t placed any orders yet',
+        'profile.shopNow': 'Shop now',
+        'profile.noWishlist': 'Your wishlist is empty',
+        'profile.browse': 'Browse products',
+        'profile.noAddresses': 'No addresses saved',
+        'profile.addAddress': 'Add an address',
+        'settings.title': 'Settings',
+        'settings.notifications': 'Notifications',
+        'settings.notificationsDesc': 'Receive promotional emails and updates',
+        'settings.darkMode': 'Dark mode',
+        'settings.darkModeDesc': 'Enable/disable dark theme',
+        'settings.language': 'Language',
+        'settings.languageDesc': 'Change website language',
+        'settings.danger': 'Danger zone',
+        'settings.deleteAccount': 'Delete my account',
         'login.title': 'Login',
         'login.email': 'Email address',
         'login.password': 'Password',
@@ -170,8 +207,6 @@ const translations = {
         'login.submit': 'Login',
         'login.noAccount': 'Don\'t have an account?',
         'login.createAccount': 'Create account',
-        
-        // Signup
         'signup.title': 'Create Account',
         'signup.firstName': 'First name',
         'signup.lastName': 'Last name',
@@ -182,8 +217,15 @@ const translations = {
         'signup.submit': 'Create my account',
         'signup.haveAccount': 'Already have an account?',
         'signup.login': 'Login',
-        
-        // Footer
+        'product.addTitle': 'Add a new product',
+        'product.name': 'Product name',
+        'product.description': 'Description',
+        'product.price': 'Price (€)',
+        'product.stock': 'Stock',
+        'product.selectCategory': 'Select a category',
+        'product.image': 'Image URL',
+        'product.features': 'Features (one per line)',
+        'product.add': 'Add product',
         'footer.description': 'Your destination for exceptional perfumes since 2010.',
         'footer.links': 'Quick Links',
         'footer.services': 'Services',
@@ -198,23 +240,18 @@ const translations = {
         'footer.cookies': 'Cookie Policy'
     },
     es: {
-        // Navigation
         'nav.home': 'Inicio',
         'nav.about': 'Acerca de',
         'nav.products': 'Productos',
         'nav.contact': 'Contacto',
         'nav.profile': 'Perfil',
-        'nav.cart': 'Carrito',
+        'nav.settings': 'Configuración',
         'nav.login': 'Iniciar sesión',
         'nav.signup': 'Registrarse',
-        
-        // Hero
         'hero.title': 'El arte de la fragancia',
         'hero.subtitle': 'Descubra nuestra exclusiva colección de perfumes para hombre y mujer. Aromas únicos que cuentan tu historia.',
         'hero.shop': 'Descubrir la colección',
         'hero.learn': 'Saber más',
-        
-        // About
         'about.title': 'Acerca de ES Parfumerie',
         'about.text1': 'Desde 2010, ES Parfumerie ofrece una selección rigurosa de las fragancias más finas del mundo. Nuestra pasión por los perfumes nos impulsa a buscar constantemente la excelencia y la autenticidad.',
         'about.text2': 'Colaboramos con los mejores perfumistas y casas de perfume para ofrecerle aromas únicos, combinando tradición e innovación.',
@@ -224,21 +261,18 @@ const translations = {
         'about.feature2.text': 'Fórmulas respetuosas con el medio ambiente',
         'about.feature3.title': 'Entrega Rápida',
         'about.feature3.text': 'Envío en 48h en Francia',
-        
-        // Products
         'products.title': 'Nuestros Perfumes',
-        'products.subtitle': 'Descubra nuestra exclusiva colección',
+        'products.subtitle': 'Descubra nuestra exclusiva colección.',
         'products.all': 'Todos',
         'products.men': 'Hombre',
         'products.women': 'Mujer',
         'products.unisex': 'Unisex',
         'products.empty': 'No hay productos disponibles',
         'products.emptyDesc': 'Nuestra colección estará disponible pronto. ¡Vuelva más tarde!',
+        'products.add': 'Añadir producto',
         'products.addToCart': 'Añadir al carrito',
         'products.viewDetails': 'Ver detalles',
         'products.outOfStock': 'Agotado',
-        
-        // Contact
         'contact.title': 'Contáctenos',
         'contact.address': 'Dirección',
         'contact.phone': 'Teléfono',
@@ -250,8 +284,33 @@ const translations = {
         'contact.formSubject': 'Asunto (opcional)',
         'contact.formMessage': 'Su mensaje',
         'contact.send': 'Enviar mensaje',
-        
-        // Login
+        'profile.title': 'Mi Perfil',
+        'profile.info': 'Información',
+        'profile.orders': 'Pedidos',
+        'profile.wishlist': 'Lista de deseos',
+        'profile.addresses': 'Direcciones',
+        'profile.settings': 'Configuración',
+        'profile.firstName': 'Nombre',
+        'profile.lastName': 'Apellido',
+        'profile.email': 'Correo electrónico',
+        'profile.phone': 'Teléfono',
+        'profile.edit': 'Editar perfil',
+        'profile.save': 'Guardar',
+        'profile.noOrders': 'Aún no ha realizado ningún pedido',
+        'profile.shopNow': 'Comprar ahora',
+        'profile.noWishlist': 'Su lista de deseos está vacía',
+        'profile.browse': 'Explorar productos',
+        'profile.noAddresses': 'No hay direcciones guardadas',
+        'profile.addAddress': 'Añadir dirección',
+        'settings.title': 'Configuración',
+        'settings.notifications': 'Notificaciones',
+        'settings.notificationsDesc': 'Recibir correos promocionales y actualizaciones',
+        'settings.darkMode': 'Modo oscuro',
+        'settings.darkModeDesc': 'Activar/desactivar tema oscuro',
+        'settings.language': 'Idioma',
+        'settings.languageDesc': 'Cambiar idioma del sitio',
+        'settings.danger': 'Zona peligrosa',
+        'settings.deleteAccount': 'Eliminar mi cuenta',
         'login.title': 'Iniciar sesión',
         'login.email': 'Correo electrónico',
         'login.password': 'Contraseña',
@@ -260,8 +319,6 @@ const translations = {
         'login.submit': 'Iniciar sesión',
         'login.noAccount': '¿No tiene una cuenta?',
         'login.createAccount': 'Crear cuenta',
-        
-        // Signup
         'signup.title': 'Crear Cuenta',
         'signup.firstName': 'Nombre',
         'signup.lastName': 'Apellido',
@@ -272,8 +329,15 @@ const translations = {
         'signup.submit': 'Crear mi cuenta',
         'signup.haveAccount': '¿Ya tiene una cuenta?',
         'signup.login': 'Iniciar sesión',
-        
-        // Footer
+        'product.addTitle': 'Añadir un nuevo producto',
+        'product.name': 'Nombre del producto',
+        'product.description': 'Descripción',
+        'product.price': 'Precio (€)',
+        'product.stock': 'Stock',
+        'product.selectCategory': 'Seleccionar una categoría',
+        'product.image': 'URL de la imagen',
+        'product.features': 'Características (una por línea)',
+        'product.add': 'Añadir producto',
         'footer.description': 'Su destino para perfumes excepcionales desde 2010.',
         'footer.links': 'Enlaces rápidos',
         'footer.services': 'Servicios',
@@ -286,6 +350,188 @@ const translations = {
         'footer.privacy': 'Política de privacidad',
         'footer.terms': 'Términos de uso',
         'footer.cookies': 'Política de cookies'
+    }
+};
+
+// Gestion du panier
+const CartManager = {
+    // Sauvegarder le panier
+    saveCart: function() {
+        const cartData = {
+            items: AppState.cart.map(item => ({
+                productId: item.product.id,
+                quantity: item.quantity
+            })),
+            timestamp: new Date().getTime()
+        };
+        
+        localStorage.setItem('es-parfumerie-cart', JSON.stringify(cartData));
+        this.updateCartCount();
+    },
+
+    // Charger le panier depuis localStorage et récupérer les produits depuis l'API
+    loadCart: async function() {
+        const cartData = localStorage.getItem('es-parfumerie-cart');
+        
+        if (!cartData) {
+            AppState.cart = [];
+            return;
+        }
+
+        try {
+            const parsedData = JSON.parse(cartData);
+            const cartItems = parsedData.items || [];
+            
+            if (cartItems.length === 0) {
+                AppState.cart = [];
+                return;
+            }
+
+            // Récupérer les IDs des produits
+            const productIds = cartItems.map(item => item.productId);
+            
+            // Récupérer les produits depuis l'API
+            const response = await fetch(`${API_BASE_URL}/api/products/by-ids`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ ids: productIds })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                const products = data.products || [];
+                
+                // Reconstruire le panier
+                AppState.cart = cartItems.map(cartItem => {
+                    const product = products.find(p => p.id == cartItem.productId);
+                    if (product) {
+                        return {
+                            product: product,
+                            quantity: cartItem.quantity
+                        };
+                    }
+                    return null;
+                }).filter(item => item !== null);
+                
+                console.log('🛒 Panier chargé:', AppState.cart.length, 'articles');
+            } else {
+                AppState.cart = [];
+            }
+        } catch (error) {
+            console.error('❌ Erreur lors du chargement du panier:', error);
+            AppState.cart = [];
+        }
+        
+        this.updateCartCount();
+    },
+
+    // Mettre à jour le compteur
+    updateCartCount: function() {
+        const cartCountElements = document.querySelectorAll('.cart-count');
+        const totalItems = AppState.cart.reduce((total, item) => total + item.quantity, 0);
+        
+        cartCountElements.forEach(element => {
+            element.textContent = totalItems;
+        });
+    },
+
+    // Ajouter au panier
+    addToCart: async function(productId, quantity = 1) {
+        try {
+            // Récupérer le produit depuis l'API
+            const response = await fetch(`${API_BASE_URL}/api/products/${productId}`);
+            
+            if (!response.ok) {
+                throw new Error('Produit non trouvé');
+            }
+
+            const data = await response.json();
+            const product = data.product;
+
+            if (!product) {
+                throw new Error('Produit non trouvé');
+            }
+
+            // Vérifier le stock
+            if (product.stock <= 0) {
+                showNotification('Ce produit est en rupture de stock', 'error');
+                return false;
+            }
+
+            // Chercher si le produit est déjà dans le panier
+            const existingItem = AppState.cart.find(item => item.product.id == productId);
+
+            if (existingItem) {
+                // Vérifier si on dépasse le stock
+                if (existingItem.quantity + quantity > product.stock) {
+                    showNotification(`Stock insuffisant. Il reste ${product.stock} unités.`, 'error');
+                    return false;
+                }
+                existingItem.quantity += quantity;
+            } else {
+                // Vérifier si on dépasse le stock
+                if (quantity > product.stock) {
+                    showNotification(`Stock insuffisant. Il reste ${product.stock} unités.`, 'error');
+                    return false;
+                }
+                AppState.cart.push({
+                    product: product,
+                    quantity: quantity
+                });
+            }
+
+            // Sauvegarder le panier
+            this.saveCart();
+            
+            // Afficher une notification
+            showNotification(`${product.name} ajouté au panier`, 'success');
+            
+            return true;
+
+        } catch (error) {
+            console.error('❌ Erreur lors de l\'ajout au panier:', error);
+            showNotification('Erreur lors de l\'ajout au panier', 'error');
+            return false;
+        }
+    },
+
+    // Supprimer du panier
+    removeFromCart: function(productId) {
+        AppState.cart = AppState.cart.filter(item => item.product.id != productId);
+        this.saveCart();
+        showNotification('Produit retiré du panier', 'info');
+    },
+
+    // Mettre à jour la quantité
+    updateQuantity: function(productId, quantity) {
+        const item = AppState.cart.find(item => item.product.id == productId);
+        
+        if (item) {
+            if (quantity <= 0) {
+                this.removeFromCart(productId);
+            } else if (quantity > item.product.stock) {
+                showNotification(`Stock limité à ${item.product.stock} unités`, 'error');
+                item.quantity = item.product.stock;
+            } else {
+                item.quantity = quantity;
+            }
+            this.saveCart();
+        }
+    },
+
+    // Vider le panier
+    clearCart: function() {
+        AppState.cart = [];
+        this.saveCart();
+    },
+
+    // Calculer le total
+    calculateTotal: function() {
+        return AppState.cart.reduce((total, item) => {
+            return total + (item.product.price * item.quantity);
+        }, 0);
     }
 };
 
@@ -310,7 +556,9 @@ function changeLanguage(lang) {
     
     // Mettre à jour le sélecteur de langue
     const languageSelect = document.getElementById('language-select');
+    const profileLanguageSelect = document.getElementById('profile-language-select');
     if (languageSelect) languageSelect.value = lang;
+    if (profileLanguageSelect) profileLanguageSelect.value = lang;
     
     // Sauvegarder la préférence
     localStorage.setItem('es-parfumerie-language', lang);
@@ -330,31 +578,45 @@ function toggleDarkMode() {
         }
     }
     
+    // Mettre à jour le toggle dans les paramètres
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    if (darkModeToggle) {
+        darkModeToggle.checked = AppState.darkMode;
+    }
+    
     // Sauvegarder la préférence
     localStorage.setItem('es-parfumerie-darkmode', AppState.darkMode);
 }
 
+// Fonction pour afficher/masquer la section profil
+function toggleProfileSection(sectionId) {
+    // Masquer toutes les sections
+    document.querySelectorAll('.profile-section').forEach(section => {
+        section.classList.remove('active');
+    });
+    
+    // Désactiver tous les liens
+    document.querySelectorAll('.profile-nav-link').forEach(link => {
+        link.classList.remove('active');
+    });
+    
+    // Afficher la section sélectionnée
+    const section = document.getElementById(sectionId);
+    if (section) {
+        section.classList.add('active');
+    }
+    
+    // Activer le lien correspondant
+    const link = document.querySelector(`[href="#${sectionId}"]`);
+    if (link) {
+        link.classList.add('active');
+    }
+}
+
 // Fonction pour charger les produits depuis l'API
 async function loadProducts() {
-    if (AppState.isLoading) return;
-    
-    AppState.isLoading = true;
-    const loadingEl = document.getElementById('products-loading');
-    const productsGrid = document.getElementById('products-grid');
-    
     try {
         console.log('🔄 Chargement des produits depuis l\'API...');
-        
-        if (loadingEl) loadingEl.style.display = 'block';
-        if (productsGrid) {
-            productsGrid.innerHTML = `
-                <div class="no-products">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    <h3>Chargement des produits...</h3>
-                    <p>Veuillez patienter</p>
-                </div>
-            `;
-        }
         
         // Ajouter un timestamp pour éviter le cache
         const timestamp = new Date().getTime();
@@ -364,21 +626,20 @@ async function loadProducts() {
             const data = await response.json();
             AppState.products = data.products || [];
             console.log(`✅ ${AppState.products.length} produits chargés`);
-            
             displayProducts();
             
             // Afficher le bouton admin si l'utilisateur est admin
-            const adminActions = document.getElementById('admin-actions');
-            if (adminActions && AppState.currentUser && AppState.currentUser.role === 'admin') {
-                adminActions.style.display = 'block';
+            if (AppState.currentUser && AppState.currentUser.role === 'admin') {
+                document.getElementById('admin-actions').style.display = 'block';
             }
-            
-            showNotification(`✅ ${AppState.products.length} produits chargés`, 'success');
             
         } else {
             console.error('❌ Erreur API:', response.status, response.statusText);
             AppState.products = [];
+            displayProducts();
             
+            // Afficher un message d'erreur
+            const productsGrid = document.getElementById('products-grid');
             if (productsGrid) {
                 productsGrid.innerHTML = `
                     <div class="no-products">
@@ -395,7 +656,10 @@ async function loadProducts() {
     } catch (error) {
         console.error('❌ Erreur réseau:', error);
         AppState.products = [];
+        displayProducts();
         
+        // Afficher un message d'erreur
+        const productsGrid = document.getElementById('products-grid');
         if (productsGrid) {
             productsGrid.innerHTML = `
                 <div class="no-products">
@@ -408,9 +672,6 @@ async function loadProducts() {
                 </div>
             `;
         }
-    } finally {
-        AppState.isLoading = false;
-        if (loadingEl) loadingEl.style.display = 'none';
     }
 }
 
@@ -491,92 +752,16 @@ function displayProducts(filter = 'all') {
 
 // Fonction pour ajouter au panier
 function addToCart(productId) {
-    const product = AppState.products.find(p => p.id == productId);
-    
-    if (!product) {
-        showNotification('Produit non trouvé', 'error');
+    // Vérifier si l'utilisateur est connecté pour l'achat
+    if (!AppState.currentUser) {
+        const shouldLogin = confirm('Vous devez être connecté pour ajouter des articles au panier.\n\nVoulez-vous vous connecter maintenant ?');
+        if (shouldLogin) {
+            openModal('login-modal');
+        }
         return;
     }
     
-    // Vérifier le stock
-    if (product.stock <= 0) {
-        showNotification('Ce produit est en rupture de stock', 'error');
-        return;
-    }
-    
-    // Ajouter au panier
-    const cartItem = AppState.cart.find(item => item.product.id == productId);
-    
-    if (cartItem) {
-        if (cartItem.quantity < product.stock) {
-            cartItem.quantity++;
-        } else {
-            showNotification('Stock insuffisant pour ce produit', 'error');
-            return;
-        }
-    } else {
-        AppState.cart.push({
-            product: product,
-            quantity: 1
-        });
-    }
-    
-    // Mettre à jour le compteur du panier
-    updateCartCount();
-    
-    // Sauvegarder le panier dans localStorage
-    saveCartToLocalStorage();
-    
-    // Afficher une notification
-    showNotification(`${product.name} a été ajouté au panier`, 'success');
-}
-
-// Fonction pour mettre à jour le compteur du panier
-function updateCartCount() {
-    const cartCount = document.querySelector('.cart-count');
-    if (cartCount) {
-        const totalItems = AppState.cart.reduce((total, item) => total + item.quantity, 0);
-        cartCount.textContent = totalItems;
-    }
-}
-
-// Fonction pour sauvegarder le panier dans localStorage
-function saveCartToLocalStorage() {
-    const cartData = {
-        items: AppState.cart.map(item => ({
-            productId: item.product.id,
-            quantity: item.quantity
-        })),
-        timestamp: new Date().getTime()
-    };
-    
-    localStorage.setItem('es-parfumerie-cart', JSON.stringify(cartData));
-}
-
-// Fonction pour charger le panier depuis localStorage
-function loadCartFromLocalStorage() {
-    const cartData = localStorage.getItem('es-parfumerie-cart');
-    
-    if (cartData) {
-        try {
-            const parsedData = JSON.parse(cartData);
-            
-            // Pour chaque élément du panier, trouver le produit correspondant
-            parsedData.items.forEach(item => {
-                const product = AppState.products.find(p => p.id == item.productId);
-                if (product) {
-                    AppState.cart.push({
-                        product: product,
-                        quantity: item.quantity
-                    });
-                }
-            });
-        } catch (error) {
-            console.error('Erreur lors du chargement du panier:', error);
-        }
-    }
-    
-    updateCartCount();
+    CartManager.addToCart(productId, 1);
 }
 
 // Fonction pour afficher une notification
@@ -629,15 +814,27 @@ async function handleLogin(email, password, rememberMe) {
     try {
         showNotification('Connexion en cours...', 'info');
         
-        // Simulation de succès
-        setTimeout(() => {
-            AppState.currentUser = {
-                id: 1,
-                email: email,
-                firstName: 'Jean',
-                lastName: 'Dupont',
-                role: email === 'admin@esparfumerie.com' ? 'admin' : 'user'
-            };
+        const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify({ email, password })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            // Mettre à jour l'état
+            AppState.currentUser = data.user;
+            
+            // Sauvegarder le token et les informations utilisateur
+            localStorage.setItem('es-parfumerie-token', data.token);
+            localStorage.setItem('es-parfumerie-user', JSON.stringify(data.user));
+            
+            if (rememberMe) {
+                localStorage.setItem('es-parfumerie-remember', 'true');
+            }
             
             // Mettre à jour l'interface
             updateUserInterface();
@@ -648,15 +845,15 @@ async function handleLogin(email, password, rememberMe) {
             // Afficher une notification
             showNotification('Connexion réussie !', 'success');
             
-            // Sauvegarder dans localStorage si "Se souvenir de moi"
-            if (rememberMe) {
-                localStorage.setItem('es-parfumerie-user', JSON.stringify(AppState.currentUser));
-            }
-        }, 1000);
-        
+            // Recharger le panier avec le nouvel utilisateur
+            CartManager.loadCart();
+            
+        } else {
+            showNotification(data.error || 'Échec de la connexion', 'error');
+        }
     } catch (error) {
-        console.error('Erreur de connexion:', error);
-        showNotification('Échec de la connexion. Veuillez vérifier vos identifiants.', 'error');
+        console.error('❌ Erreur de connexion:', error);
+        showNotification('Erreur de connexion au serveur', 'error');
     }
 }
 
@@ -665,15 +862,28 @@ async function handleSignup(firstName, lastName, email, password) {
     try {
         showNotification('Création du compte en cours...', 'info');
         
-        setTimeout(() => {
-            // Simulation de succès
-            AppState.currentUser = {
-                id: 1,
-                email: email,
-                firstName: firstName,
-                lastName: lastName,
-                role: 'user'
-            };
+        const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify({ 
+                email, 
+                password, 
+                firstName, 
+                lastName 
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            // Mettre à jour l'état
+            AppState.currentUser = data.user;
+            
+            // Sauvegarder le token et les informations utilisateur
+            localStorage.setItem('es-parfumerie-token', data.token);
+            localStorage.setItem('es-parfumerie-user', JSON.stringify(data.user));
             
             // Mettre à jour l'interface
             updateUserInterface();
@@ -684,35 +894,78 @@ async function handleSignup(firstName, lastName, email, password) {
             // Afficher une notification
             showNotification('Compte créé avec succès !', 'success');
             
-            // Sauvegarder dans localStorage
-            localStorage.setItem('es-parfumerie-user', JSON.stringify(AppState.currentUser));
-        }, 1000);
-        
+        } else {
+            showNotification(data.error || 'Échec de la création du compte', 'error');
+        }
     } catch (error) {
-        console.error('Erreur d\'inscription:', error);
-        showNotification('Échec de la création du compte. Veuillez réessayer.', 'error');
+        console.error('❌ Erreur d\'inscription:', error);
+        showNotification('Erreur de connexion au serveur', 'error');
     }
 }
 
 // Fonction pour mettre à jour l'interface utilisateur
 function updateUserInterface() {
     const authButtons = document.querySelector('.auth-buttons');
-    const adminActions = document.getElementById('admin-actions');
+    const profileSection = document.getElementById('profile');
+    const profileName = document.getElementById('profile-name');
+    const profileEmail = document.getElementById('profile-email');
     
     if (AppState.currentUser) {
         // Masquer les boutons de connexion/inscription
         if (authButtons) authButtons.style.display = 'none';
         
+        // Afficher la section profil
+        if (profileSection) profileSection.style.display = 'block';
+        
+        // Mettre à jour les informations du profil
+        if (profileName) {
+            profileName.textContent = `${AppState.currentUser.firstName || ''} ${AppState.currentUser.lastName || ''}`.trim() || AppState.currentUser.email;
+        }
+        if (profileEmail) profileEmail.textContent = AppState.currentUser.email;
+        
+        // Remplir le formulaire de profil
+        if (document.getElementById('first-name')) {
+            document.getElementById('first-name').value = AppState.currentUser.firstName || '';
+            document.getElementById('last-name').value = AppState.currentUser.lastName || '';
+            document.getElementById('user-email').value = AppState.currentUser.email;
+            document.getElementById('user-phone').value = AppState.currentUser.phone || '';
+        }
+        
         // Afficher le bouton admin si l'utilisateur est admin
-        if (adminActions && AppState.currentUser.role === 'admin') {
-            adminActions.style.display = 'block';
+        if (AppState.currentUser.role === 'admin') {
+            document.getElementById('admin-actions').style.display = 'block';
         }
     } else {
         // Afficher les boutons de connexion/inscription
         if (authButtons) authButtons.style.display = 'flex';
         
-        // Masquer le bouton admin
-        if (adminActions) adminActions.style.display = 'none';
+        // Masquer la section profil
+        if (profileSection) profileSection.style.display = 'none';
+    }
+}
+
+// Fonction pour déconnecter l'utilisateur
+function logoutUser() {
+    // Supprimer les données de l'utilisateur
+    localStorage.removeItem('es-parfumerie-token');
+    localStorage.removeItem('es-parfumerie-user');
+    localStorage.removeItem('es-parfumerie-remember');
+    
+    // Réinitialiser l'état
+    AppState.currentUser = null;
+    
+    // Mettre à jour l'interface
+    updateUserInterface();
+    
+    // Vider le panier
+    CartManager.clearCart();
+    
+    // Afficher une notification
+    showNotification('Déconnexion réussie', 'info');
+    
+    // Revenir à l'accueil
+    if (window.location.pathname.includes('cart.html')) {
+        window.location.href = 'index.html';
     }
 }
 
@@ -742,17 +995,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // Charger les préférences utilisateur
     const savedLanguage = localStorage.getItem('es-parfumerie-language') || 'fr';
     const savedDarkMode = localStorage.getItem('es-parfumerie-darkmode') === 'true';
+    const savedToken = localStorage.getItem('es-parfumerie-token');
     const savedUser = localStorage.getItem('es-parfumerie-user');
     
     // Appliquer les préférences
     AppState.language = savedLanguage;
     AppState.darkMode = savedDarkMode;
     
-    if (savedUser) {
+    if (savedToken && savedUser) {
         try {
             AppState.currentUser = JSON.parse(savedUser);
         } catch (error) {
-            console.error('Erreur lors du chargement de l\'utilisateur:', error);
+            console.error('❌ Erreur lors du chargement de l\'utilisateur:', error);
         }
     }
     
@@ -777,10 +1031,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // Charger les produits
     loadProducts();
     
-    // Charger le panier (après le chargement des produits)
-    setTimeout(() => {
-        loadCartFromLocalStorage();
-    }, 1000);
+    // Charger le panier
+    CartManager.loadCart();
+    
+    // Rafraîchir les produits toutes les 30 secondes
+    setInterval(() => {
+        if (document.visibilityState === 'visible') {
+            loadProducts();
+        }
+    }, 30000);
+    
+    // Écouter les messages depuis le panel admin
+    window.addEventListener('message', function(event) {
+        if (event.data && event.data.type === 'RELOAD_PRODUCTS') {
+            console.log('🔄 Rechargement des produits demandé depuis le panel admin');
+            loadProducts();
+            showNotification('Nouveaux produits disponibles !', 'info');
+        }
+    });
     
     // Navigation mobile
     const menuToggle = document.getElementById('menu-toggle');
@@ -808,15 +1076,31 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Basculer le mode sombre
     const themeToggle = document.getElementById('theme-toggle');
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    
     if (themeToggle) {
         themeToggle.addEventListener('click', toggleDarkMode);
     }
     
+    if (darkModeToggle) {
+        darkModeToggle.checked = AppState.darkMode;
+        darkModeToggle.addEventListener('change', toggleDarkMode);
+    }
+    
     // Changer la langue
     const languageSelect = document.getElementById('language-select');
+    const profileLanguageSelect = document.getElementById('profile-language-select');
+    
     if (languageSelect) {
         languageSelect.value = AppState.language;
         languageSelect.addEventListener('change', function() {
+            changeLanguage(this.value);
+        });
+    }
+    
+    if (profileLanguageSelect) {
+        profileLanguageSelect.value = AppState.language;
+        profileLanguageSelect.addEventListener('change', function() {
             changeLanguage(this.value);
         });
     }
@@ -826,7 +1110,7 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
             
-            if (href.startsWith('#') && href.length > 1) {
+            if (href === '#home' || href === '#about' || href === '#products' || href === '#contact' || href === '#profile' || href === '#settings') {
                 e.preventDefault();
                 
                 // Mettre à jour la navigation active
@@ -834,16 +1118,42 @@ document.addEventListener('DOMContentLoaded', function() {
                     navLink.classList.remove('active');
                 });
                 
-                this.classList.add('active');
+                if (href !== '#profile' && href !== '#settings') {
+                    this.classList.add('active');
+                }
                 
-                // Scroll vers la section
-                const targetId = href.substring(1);
-                const targetElement = document.getElementById(targetId);
-                
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 100,
-                        behavior: 'smooth'
+                // Afficher la section correspondante
+                if (href === '#profile' || href === '#settings') {
+                    // Afficher la section profil
+                    document.querySelectorAll('main > section').forEach(section => {
+                        section.style.display = 'none';
+                    });
+                    
+                    const profileSection = document.getElementById('profile');
+                    if (profileSection) {
+                        profileSection.style.display = 'block';
+                        
+                        // Afficher la bonne sous-section
+                        if (href === '#settings') {
+                            toggleProfileSection('settings');
+                        } else {
+                            toggleProfileSection('profile-info');
+                        }
+                    }
+                } else {
+                    // Masquer la section profil
+                    const profileSection = document.getElementById('profile');
+                    if (profileSection) {
+                        profileSection.style.display = 'none';
+                    }
+                    
+                    // Afficher la section correspondante
+                    document.querySelectorAll('main > section').forEach(section => {
+                        if (section.id === href.substring(1)) {
+                            section.style.display = 'block';
+                        } else if (section.id !== 'profile') {
+                            section.style.display = 'none';
+                        }
                     });
                 }
                 
@@ -852,6 +1162,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     mobileMenu.classList.remove('open');
                 }
             }
+        });
+    });
+    
+    // Navigation du profil
+    document.querySelectorAll('.profile-nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const sectionId = this.getAttribute('href').substring(1);
+            toggleProfileSection(sectionId);
         });
     });
     
@@ -864,6 +1183,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('signup-btn')?.addEventListener('click', () => openModal('signup-modal'));
     document.getElementById('mobile-login-btn')?.addEventListener('click', () => openModal('login-modal'));
     document.getElementById('mobile-signup-btn')?.addEventListener('click', () => openModal('signup-modal'));
+    document.getElementById('add-product-btn')?.addEventListener('click', () => openModal('add-product-modal'));
     document.getElementById('switch-to-signup')?.addEventListener('click', () => {
         closeModal('login-modal');
         openModal('signup-modal');
@@ -933,6 +1253,57 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Formulaire d'ajout de produit
+    const addProductForm = document.getElementById('add-product-form');
+    if (addProductForm) {
+        addProductForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const productData = {
+                name: document.getElementById('product-name').value,
+                description: document.getElementById('product-description').value,
+                price: parseFloat(document.getElementById('product-price').value),
+                stock: parseInt(document.getElementById('product-stock').value),
+                category: document.getElementById('product-category').value,
+                image_url: document.getElementById('product-image').value,
+                features: document.getElementById('product-features').value.split('\n').filter(f => f.trim() !== '')
+            };
+            
+            try {
+                const token = localStorage.getItem('es-parfumerie-token');
+                const response = await fetch(`${API_BASE_URL}/api/products`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(productData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    closeModal('add-product-modal');
+                    showNotification('Produit ajouté avec succès !', 'success');
+                    document.getElementById('add-product-form').reset();
+                    
+                    // Recharger les produits
+                    loadProducts();
+                    
+                    // Notifier le panel admin si ouvert
+                    if (window.opener) {
+                        window.opener.postMessage({ type: 'RELOAD_PRODUCTS' }, '*');
+                    }
+                } else {
+                    showNotification(data.error || 'Erreur lors de l\'ajout du produit', 'error');
+                }
+            } catch (error) {
+                console.error('❌ Erreur:', error);
+                showNotification('Erreur de connexion au serveur', 'error');
+            }
+        });
+    }
+    
     // Formulaire de contact
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
@@ -961,40 +1332,94 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Bouton de rafraîchissement des produits
-    const refreshBtn = document.getElementById('refresh-products');
-    if (refreshBtn) {
-        refreshBtn.addEventListener('click', function() {
-            this.disabled = true;
-            const originalHTML = this.innerHTML;
-            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Chargement...';
+    // Édition du profil
+    const editProfileBtn = document.getElementById('edit-profile-btn');
+    const saveProfileBtn = document.getElementById('save-profile-btn');
+    
+    if (editProfileBtn) {
+        editProfileBtn.addEventListener('click', function() {
+            // Activer les champs
+            document.getElementById('first-name').disabled = false;
+            document.getElementById('last-name').disabled = false;
+            document.getElementById('user-phone').disabled = false;
             
-            loadProducts();
-            
-            setTimeout(() => {
-                this.disabled = false;
-                this.innerHTML = originalHTML;
-            }, 2000);
+            // Afficher le bouton de sauvegarde
+            this.style.display = 'none';
+            if (saveProfileBtn) {
+                saveProfileBtn.style.display = 'inline-block';
+            }
         });
     }
     
-    // Écouter les messages depuis le panel admin
-    window.addEventListener('message', function(event) {
-        if (event.data && event.data.type === 'RELOAD_PRODUCTS') {
-            console.log('🔄 Rechargement des produits demandé depuis le panel admin');
-            showNotification('Nouveaux produits disponibles !', 'info');
-            loadProducts();
-        }
-    });
+    if (saveProfileBtn) {
+        saveProfileBtn.addEventListener('click', async function(e) {
+            e.preventDefault();
+            
+            const updatedData = {
+                first_name: document.getElementById('first-name').value,
+                last_name: document.getElementById('last-name').value,
+                phone: document.getElementById('user-phone').value
+            };
+            
+            try {
+                const token = localStorage.getItem('es-parfumerie-token');
+                const response = await fetch(`${API_BASE_URL}/api/users/me`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(updatedData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Mettre à jour l'utilisateur dans l'état
+                    if (AppState.currentUser) {
+                        AppState.currentUser.firstName = updatedData.first_name;
+                        AppState.currentUser.lastName = updatedData.last_name;
+                        AppState.currentUser.phone = updatedData.phone;
+                        localStorage.setItem('es-parfumerie-user', JSON.stringify(AppState.currentUser));
+                    }
+                    
+                    showNotification('Profil mis à jour avec succès !', 'success');
+                    
+                    // Désactiver les champs
+                    document.getElementById('first-name').disabled = true;
+                    document.getElementById('last-name').disabled = true;
+                    document.getElementById('user-phone').disabled = true;
+                    
+                    // Afficher le bouton d'édition
+                    this.style.display = 'none';
+                    if (editProfileBtn) {
+                        editProfileBtn.style.display = 'inline-block';
+                    }
+                    
+                    // Mettre à jour l'affichage
+                    updateUserInterface();
+                    
+                } else {
+                    showNotification(data.error || 'Erreur lors de la mise à jour', 'error');
+                }
+            } catch (error) {
+                console.error('❌ Erreur:', error);
+                showNotification('Erreur de connexion au serveur', 'error');
+            }
+        });
+    }
     
-    // Rafraîchir les produits toutes les 60 secondes
-    setInterval(() => {
-        if (document.visibilityState === 'visible') {
-            loadProducts();
-        }
-    }, 60000);
+    // Déconnexion (bouton dans les paramètres)
+    const deleteAccountBtn = document.getElementById('delete-account-btn');
+    if (deleteAccountBtn) {
+        deleteAccountBtn.addEventListener('click', function() {
+            if (confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.')) {
+                logoutUser();
+            }
+        });
+    }
     
-    // Ajouter les styles pour les notifications
+    // Ajouter des styles pour les notifications
     const style = document.createElement('style');
     style.textContent = `
         .notification {
